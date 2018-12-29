@@ -3,11 +3,10 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '5.2.1'
-gem 'bootstrap-sass'
 
+gem 'bootstrap', '~> 4.2.1'
 gem 'haml'
 
-gem 'rails-api', require: 'rails-api/action_controller/api'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -46,7 +45,7 @@ gem 'jquery-rails'
 
 gem 'turbolinks'
 
-
+gem 'listen', '~> 3.1.5'
 gem "active_model_serializers"
 
 
