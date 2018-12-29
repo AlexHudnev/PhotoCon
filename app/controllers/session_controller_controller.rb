@@ -3,9 +3,9 @@ class SessionControllerController < ApplicationController
     begin
 	    @user = User.from_omniauth(request.env['omniauth.auth'])
 	    session[:user_id] = @user.id
-	    flash[:success] = "Добро пожаловать, #{@user.name}!"
+	    flash[:success] = "Hello, #{@user.name}!"
     rescue
-	    flash[:warning] = "Возникла ошибка при попытке войти в систему"
+	    flash[:warning] = "Some problems..."
 	  end
 	  redirect_to root_path
   end
@@ -13,7 +13,7 @@ class SessionControllerController < ApplicationController
   def destroy
 	  if current_user
 	    session.delete(:user_id)
-	    flash[:success] = 'Удачи!'
+	    flash[:success] = 'Goodbye'
 	  end
 	  redirect_to root_path
   end

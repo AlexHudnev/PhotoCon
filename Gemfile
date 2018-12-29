@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.2.1'
 
-gem 'bootstrap', '~> 4.2.1'
+gem 'bootstrap-sass'
+
 gem 'haml'
 
 
@@ -32,7 +33,7 @@ gem 'redis'
 gem 'kaminari'
 
 gem 'active_interaction', '~> 3.6'
-
+gem "figaro"
 gem 'pg'
 
 gem 'sass-rails'

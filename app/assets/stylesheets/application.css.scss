@@ -1,0 +1,27 @@
+/*
+ *= require_self
+ *= require_tree .
+*/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.navbar-custom {
+    background-color: #4c75a3;
+}
+
+nav {
+
+  img {
+    max-width: 48px;
+ border-radius: 24px;
+
+  }
+}
+
+.navbar-brand
+{
+font-size: 200%;
+color:white;
+}
+
+
