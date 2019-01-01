@@ -2,14 +2,14 @@
  *= require_self
  *= require_tree .
 */
-@import "bootstrap-sprockets";
+
 @import "bootstrap";
 
 .navbar-custom {
     background-color: #4c75a3;
 }
 
-nav {
+.nav {
 
   img {
     max-width: 48px;
@@ -17,11 +17,62 @@ nav {
 
   }
 }
-
-.navbar-brand
+.post
 {
+background-color:white;
+
+}
+.comment
+{
+img {
+    max-width: 48px;
+ border-radius: 24px;
+
+  }
+hyphens: auto;
+ background-color:white;
+border-bottom: 1px solid lightgray;
+
+}
+
+.allcom
+{
+
+background-color:white;
+border: 1px solid gray;
+
+}
+
+.btn-custom
+{
+border: 0px;
+background-color: #4c75a3;
+text-decoration: none;
+font-size: 200%;
+color:black;
+}
+.btn-custom:hover
+{
+border: 0px;
+background-color: #45688E;
+text-decoration: none;
 font-size: 200%;
 color:white;
 }
 
 
+
+
+.navbar-brand
+{
+font-size: 200%;
+
+}
+
+container {
+	.jimbotron {
+	  display: inline !important;
+	  position: relative !important;
+	 background:#ffffff; 
+	}
+}

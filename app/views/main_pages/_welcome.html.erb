@@ -1,9 +1,12 @@
+<div class="shadow-lg" >
 <div>
-  <h1 class="text-center text-white">Welcome</h1>
-  <p >
+  <h1 class="text-center text-primary display-1">Welcome</h1>
+  <p class=" display-4">
 You can't leave a comment until you Sign in</p>
 </div>
-  <ul class="nav navbar-nav ">
-    <li  ><%= link_to 'Sign in with Facebook', '/auth/facebook' %></li>
-    <li ><%= link_to 'Sign in with VKontakte', '/auth/vkontakte' %></li>
-  </ul>
+
+    <div class="panel-body">
+ <nav class="navbar navbar-expand-lg navbar-light bg-darck:"> <ul class="nav navbar-nav ">
+    <li ><%= link_to 'Sign in with Facebook', '/auth/facebook',class: 'btn btn-lg' %></li>
+    <li ><%= link_to 'Sign in with VKontakte', '/auth/vkontakte',class: 'btn btn-lg ' %></li>
+  </ul></nav></div></div>

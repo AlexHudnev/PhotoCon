@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 
-	class << self
+has_many :photos
+has_many :comments
+has_many :likes, through: :photos
+class << self
 	  def from_omniauth(auth_hash)
 	    user = find_or_create_by(uid: auth_hash['uid'], access_token: auth_hash['provider'])
 	    user.first_name = auth_hash['info']['first_name']
