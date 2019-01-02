@@ -1,14 +1,4 @@
-<% @photos.each do |photo| %>
-  <div class="jumbotron">
-
-
-        <table>
-	<tr> <td> Title: <%= photo.photo_name %><br></td> </tr>
-<tr><td><%= image_tag photo.photography.url %><br></td> </tr>
-        </table>
-
-
-
-
-
-<% end %>-
+<% if !current_user %>
+  <%= render 'welcome' %>
+<%end%>
+  <%= render 'main2' %>

@@ -10,8 +10,7 @@
 
     <style>
       body {
-       background:#e1e8ef; 
-
+       background:#e1e8ef;
       }
      </style>
   </head>
@@ -29,12 +28,13 @@
 
             <li class="nav-item dropdown">
               <div class="btn btn-lg align-middle btn-custom  dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		 <em><%=current_user.first_name %></em>
+		 <%=current_user.first_name %>
           <%= image_tag current_user.image_url, alt: current_user.first_name %>
         </div>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to 'New Photo',new_photo_path,class: 'dropdown-item' %>
-
+            
+              <%= link_to 'Update profile', edit_user_path(current_user.id) ,class: 'dropdown-item'  %>
  	          <%= link_to '   Out   ', logout_path,class: 'dropdown-item', method: :delete %>
             </div>
  	        </ul>

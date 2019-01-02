@@ -1,17 +1,21 @@
+<%= render 'sorting'%>
 <% @photos.each do |photo| %>
   <div class="jumbotron post">
 
 
         <table>
-	<tr> <td> Title: <%= photo.photo_name %><br></td> </tr>
+
+                      <% user = User.find(photo.user_id) %>
+                      <h2 class="text-center">Title: <%= photo.photo_name %></h2>
+	<tr> <td >   Author: <%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></td> </tr>
 <tr>
-          <td width="auto" valign='middle' align='middle'>
+          <td  valign='middle' align='middle'  width="auto">
             <%= image_tag photo.photography.url %><br></td> </tr>
 
-            <% user = User.find(photo.user_id) %>
 
-          <tr> <td> Author: <%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %>
-          </td><td> Rating:<%= photo.rating %></td></tr>
+
+          <tr> <td>
+           Rating:<%= photo.rating %></td></tr>
 <tr><td>
 <% if current_user %>
                    <%= form_for ([photo,photo.likes.build]) do |f| %>
@@ -22,7 +26,7 @@
         </td>
 
  </tr>
-<tr><td>
+<tr><td >
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent<%=photo.id%>">
     <div class="allcom p-4">
@@ -75,7 +79,7 @@
 
 
   <nav class="navbar ">
-<div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Open comments</div>
+<div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Comments</div>
 
 
   </nav>

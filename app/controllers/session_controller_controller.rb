@@ -2,11 +2,13 @@ class SessionControllerController < ApplicationController
   def create
     begin
 	    @user = User.from_omniauth(request.env['omniauth.auth'])
-	    session[:user_id] = @user.id
-	    flash[:success] = "Hello, #{@user.name}!"
-    rescue
-	    flash[:warning] = "Some problems..."
+	    if session[:user_id] = @user.id
+	    flash[:success] = "Hello, #{@user.first_name}!"
+
+    else
+	    flash[:warning] = "Some problems with auth..."
 	  end
+  end
 	  redirect_to root_path
   end
 
