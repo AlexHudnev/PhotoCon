@@ -1,5 +1,6 @@
 <%= render 'sorting'%>
 <% @photos.each do |photo| %>
+   <% if photo.aasm_state == 'approved' %>
   <div class="jumbotron post">
 
 
@@ -88,5 +89,8 @@
 
 
       </table></div>
-
+      <% elsif photo.aasm_state == 'moderated' %>
+                  Photo maderated
+                
+                 <% end %>
 <% end %>

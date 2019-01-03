@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   def index
     #@photo= Photo.where(user_id: current_user.id)
 #@photos= Photo.all
-@photos = params[:sorting] ?Photo.page(params[:page]).reorder(params[:sorting]) : Photo.page(params[:page])
+@photos = params[:sorting] ?Photo.page(params[:page]).reorder(params[:sorting]) : Photo.page(params[:page]).where(aasm_state: :approved)
   end
 
 def new
@@ -30,7 +30,7 @@ end
  def search
      ids =[]
      Photo.all.each {|n| ids << n.id if n.photo_name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
-     @photos = Photo.where(id: ids)
+     @photos = Photo.where(id: ids, aasm_state: :approved)
 
      flash.now[:warning] = "we can't find it '#{params[:q]}' ." unless @photos.any?
    end
