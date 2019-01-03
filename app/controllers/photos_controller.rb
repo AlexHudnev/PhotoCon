@@ -17,7 +17,7 @@ end
    @photo.save
    if @photo.save
      flash[:success] = "all done"
-     redirect_to @photo
+     redirect_to root_path
    else
      render 'new'
    end
@@ -26,6 +26,7 @@ end
  def show
   @photo = Photo.find(params[:id])
  end
+
  def search
      ids =[]
      Photo.all.each {|n| ids << n.id if n.photo_name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
