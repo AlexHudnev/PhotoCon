@@ -1,0 +1,39 @@
+
+<% comments.each do |comments| %>
+
+
+
+<% unless @printed_comment.include?(comments.id) %>
+
+             <div class="comment">
+               <table>
+                 <tr> <td rowspan="3"  width='50'>  <% user = User.find(comments.user_id.to_i) %>
+                     <%= image_tag user.image_url, alt: user.first_name %></td>
+                       <td><%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></td></tr>
+                       <tr><td> <%=simple_format(comments.body) %></td></tr>
+
+                       <tr><td> <%= comments.created_at %>
+                         <div class="pos-f-t">
+                           <div class="collapse" id="navbarComment<%=comments.id%>">
+                             <div class="allcom p-4">
+
+                        <%= render '/comments/comments', comments: comments.sub_comments if comments.sub_comments %>
+                      </div></div></div>
+                      <% if comments.sub_comments %>
+                         <nav class="navbar ">
+                         <div class=" btn btn-link " data-toggle="collapse" data-target="#navbarComment<%=comments.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Responds </div>
+
+                         </nav>
+
+                       </td>   </tr> <%end%> <tr><td> <% if current_user %> <%= link_to 'Respond ', new_user_photo_comment_comment_path(parent_comment_id: comments, user_id: current_user, photo_id: comments.photo_id) %></td></tr>
+<%else%> 
+
+<% end %>
+               </table>
+ </div>
+             <% @printed_comment << comments.id %>
+             <% end %>
+
+
+
+<% end %>

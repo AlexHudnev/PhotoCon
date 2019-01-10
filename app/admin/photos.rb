@@ -1,4 +1,4 @@
-
+require 'sidekiq/api'
 ActiveAdmin.register Photo do
 
 index do
@@ -38,6 +38,7 @@ column "Current Status", :aasm_state
 
   member_action :ban do
     resource.ban!
+ RemovePhotoWorker.perform_in(20.minutes, params[:id])
     redirect_to admin_photos_path
   end
 
@@ -45,5 +46,8 @@ column "Current Status", :aasm_state
     resource.allow!
     redirect_to admin_photos_path
   end
+
+
+
 
 end

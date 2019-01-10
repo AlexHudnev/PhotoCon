@@ -14,9 +14,10 @@ end
  def create
    @photo = current_user.photos.build(photo_params)
    @photo.rating = 0
+   @photo.comment_count = 0
    @photo.save
    if @photo.save
-     flash[:success] = "all done"
+     flash[:success] = "Photo send to moderation"
      redirect_to root_path
    else
      render 'new'

@@ -33,30 +33,19 @@
     <div class="allcom p-4">
 
 	<% if photo.comments.any? %>
-            <h5>All comments:</h5>
-            <% photo.comments.each do |compr| %>
-                        <div class="comment">
-                          <table>
-                            <tr> <td rowspan="3"  width='50'>  <% user = User.find(compr.user_id.to_i) %>
-                                <%= image_tag user.image_url, alt: user.first_name %></td>
-
-                                  <td><%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></td></tr>
-                                  <tr><td> <%=simple_format(compr.body) %></td></tr>
-                                  <tr><td> <%= compr.created_at %></td></tr>
-
-                          </table>
-
-                        </div>
-                        <% end %>
-
-
-
-          <% else %>
-            <h5>No comments here</h5>
-          <% end %>
+  <h5>All comments:</h5>
+  <% @comments = photo.comments.order(updated_at: :desc, id: :asc) %>
+  <% @printed_comment = [] %>
+  <%= render '/comments/comments', comments: @comments , photo: photo %>
+<% else %>
+  <h5 align='right'>No comments here</h5>
+<% end %>
 
   <% if current_user %>
+
+
  <%= form_for([photo, photo.comments.build]) do |f| %>
+
 
 <div class="comment"> <table >
    <tr> <td   width='50'>
@@ -80,7 +69,7 @@
 
 
   <nav class="navbar ">
-<div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Comments</div>
+<div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Comments <%= photo.comment_count %></div>
 
 
   </nav>
@@ -89,8 +78,7 @@
 
 
       </table></div>
-      <% elsif photo.aasm_state == 'moderated' %>
-                  Photo maderated
-                
+
+
                  <% end %>
 <% end %>

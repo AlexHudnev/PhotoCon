@@ -1,0 +1,20 @@
+<% parent_comment = Comment.find(params[:parent_comment_id])%>
+<% photo = Photo.find(params[:photo_id]) %>
+<% parent_comment.body.each_line do |line|  %>
+  <br><span> <%= line %> </span>
+<% end %>
+
+<%= form_for ([current_user, photo, parent_comment, photo.comments.build]) do |f| %>
+<div class="comment"> <table >
+   <tr> <td   width='50'>
+       <%= image_tag current_user.image_url, alt:  current_user.first_name %></td>
+
+            <td >
+              <%= f.label 'Write comment' %><br>
+              <%= f.text_area :body %>
+
+
+
+              <%= f.submit 'Post', class: '  btn' %>
+            </td></tr></table></div>
+          <% end %>

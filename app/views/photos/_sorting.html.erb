@@ -4,7 +4,9 @@
  <div ><%= link_to 'Date (Old to new)', photos_path(sorting: 'created_at ASC', search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
  <%= link_to 'Date (New to old)',photos_path(sorting: 'created_at DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
  <%= link_to 'Rating (High to low)', photos_path(sorting: 'rating DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
- <%= link_to 'Rating (Low to high)', photos_path(sorting: 'rating ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %>
+ <%= link_to 'Rating (Low to high)', photos_path(sorting: 'rating ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %>|
+ <%= link_to 'Popularity (High to low)', photos_path(sorting: 'comment_count DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
+ <%= link_to 'Popularity (Low to high)', photos_path(sorting: 'comment_count ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %>
 </div></td>
 
  <td><div ><%= form_tag("search", method: "get") do %>
