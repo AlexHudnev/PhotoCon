@@ -1,84 +1,83 @@
+
 <%= render 'sorting'%>
+
+<div class="pagination-lg ">
+ <%= paginate @photos %>
+</div>
+
 <% @photos.each do |photo| %>
    <% if photo.aasm_state == 'approved' %>
   <div class="jumbotron post">
-
-
         <table>
-
-                      <% user = User.find(photo.user_id) %>
-                      <h2 class="text-center">Title: <%= photo.photo_name %></h2>
+               <% user = User.find(photo.user_id) %>
+              <h2 class="text-center">Title: <%= photo.photo_name %></h2>
 	<tr> <td >   Author: <%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></td> </tr>
 <tr>
-          <td  valign='middle' align='middle'  width="auto">
-            <%= image_tag photo.photography.url %><br></td> </tr>
-
-
-
-          <tr> <td>
-           Rating:<%= photo.rating %></td></tr>
-<tr><td>
-<% if current_user %>
-                   <%= form_for ([photo,photo.likes.build]) do |f| %>
-                   <%= f.submit "♥",  class: ' btn-link btn'%>
-                   <% end %>
-
-                    <% end %>
-        </td>
-
+   <td  valign='middle' align='middle'  width="auto">
+  <%= image_tag photo.photography.url %><br></td>
  </tr>
-<tr><td >
+ <tr>
+    <td>Rating:<%= photo.rating %></td>
+  </tr>
+<tr>
+  <td><% if current_user %>
+      <%= form_for ([photo,photo.likes.build]) do |f| %>
+      <%= f.submit "♥",  class: ' btn-link btn'%>
+      <% end %>
+      <% end %>
+        </td>
+       </tr>
+<tr>
+  <td >
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent<%=photo.id%>">
     <div class="allcom p-4">
+    <% if photo.comments.any? %>
+      <h5>All comments:</h5>
+      <% @comments = photo.comments.order(updated_at: :desc, id: :asc) %>
+      <% @printed_comment = [] %>
+      <%= render '/comments/comments', comments: @comments , photo: photo %>
+    <% else %>
+      <h5 align='right'>No comments here</h5>
+    <% end %>
 
-	<% if photo.comments.any? %>
-  <h5>All comments:</h5>
-  <% @comments = photo.comments.order(updated_at: :desc, id: :asc) %>
-  <% @printed_comment = [] %>
-  <%= render '/comments/comments', comments: @comments , photo: photo %>
-<% else %>
-  <h5 align='right'>No comments here</h5>
-<% end %>
+    <% if current_user %>
 
-  <% if current_user %>
-
-
- <%= form_for([photo, photo.comments.build]) do |f| %>
+      <%= form_for([photo, photo.comments.build]) do |f| %>
 
 
-<div class="comment"> <table >
-   <tr> <td   width='50'>
-       <%= image_tag current_user.image_url, alt:  current_user.first_name %></td>
+        <div class="comment"> <table >
+            <tr>
+               <td width='50'>
+                  <%= image_tag current_user.image_url, alt:  current_user.first_name %></td>
 
-            <td >
-              <%= f.label 'Write comment' %><br>
-              <%= f.text_area :body %>
-
-
-
-              <%= f.submit 'Post', class: '  btn' %>
-            </td></tr></table></div>
+                <td >
+                  <%= f.label 'Write comment' %><br>
+                  <%= f.text_area :body %>
+                  <%= f.submit 'Post', class: '  btn' %>
+                </td>
+              </tr>
+          </table>
+        </div>
           <% end %>
           <% else %>
-                        <p>you need sign in</p>
+            <p>you need sign in</p>
         <% end %>
     </div>
   </div>
 
-
-
   <nav class="navbar ">
-<div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Comments <%= photo.comment_count %></div>
-
-
+    <div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Comments <%= photo.comment_count %></div>
   </nav>
-</div></td></tr>
+</div>
+  </td>
+  </tr>
+      </table>
+    </div>
+   <% end %>
+   <% end %>
 
 
-
-      </table></div>
-
-
-                 <% end %>
-<% end %>
+    <div class="pagination-lg ">
+     <%= paginate @photos %>
+    </div>

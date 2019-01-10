@@ -76,6 +76,9 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.3)
     byebug (10.0.2)
     carrierwave (1.2.2)
@@ -482,6 +485,7 @@ DEPENDENCIES
   active_model_serializers
   activeadmin
   bootstrap
+  bootstrap-kaminari-views
   byebug
   carrierwave (= 1.2.2)
   coffee-rails

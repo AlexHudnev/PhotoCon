@@ -1,18 +1,17 @@
 require 'sidekiq/api'
 ActiveAdmin.register Photo do
-
-index do
-  selectable_column
-  column :photo_name
-  column :photo do |pg|
-    image_tag pg.photography.url
-  end
-column "Current Status", :aasm_state
-    column "Moderation", :moderation do |pg|
+  index do
+    selectable_column
+    column :photo_name
+    column :photo do |pg|
+      image_tag pg.photography.url
+    end
+    column 'Current Status', :aasm_state
+    column 'Moderation', :moderation do |pg|
       columns do
         if pg.aasm_state == 'moderated'
           column do
-      	    link_to 'Approve', approve_admin_photo_path(pg)
+            link_to 'Approve', approve_admin_photo_path(pg)
           end
           column do
             link_to 'Ban', ban_admin_photo_path(pg)
@@ -38,7 +37,7 @@ column "Current Status", :aasm_state
 
   member_action :ban do
     resource.ban!
- RemovePhotoWorker.perform_in(20.minutes, params[:id])
+    RemovePhotoWorker.perform_in(20.minutes, params[:id])
     redirect_to admin_photos_path
   end
 
@@ -46,8 +45,4 @@ column "Current Status", :aasm_state
     resource.allow!
     redirect_to admin_photos_path
   end
-
-
-
-
 end
