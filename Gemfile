@@ -9,7 +9,7 @@ gem 'bootstrap-kaminari-views'
 gem 'carrierwave', '1.2.2'
 gem 'coffee-rails'
 gem 'devise'
-gem 'figaro'
+
 gem 'fog'
 gem 'haml'
 gem 'jquery-rails'
