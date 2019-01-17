@@ -68,7 +68,7 @@ GEM
       activesupport (>= 3.0.0)
     arel (9.0.0)
     ast (2.4.0)
-    autoprefixer-rails (9.4.4)
+    autoprefixer-rails (9.4.5)
       execjs
     bcrypt (3.1.12)
     bindex (0.5.0)
@@ -272,7 +272,7 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hashie (3.6.0)
-    i18n (1.5.1)
+    i18n (1.5.2)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.9.0)
       actionpack (>= 4.2, < 5.3)
@@ -300,6 +300,8 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    leaderboard (3.12.1)
+      redis
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -326,7 +328,7 @@ GEM
     mutations (0.9.0)
       activesupport
     nio4r (2.3.1)
-    nokogiri (1.10.0)
+    nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     oauth2 (1.4.1)
       faraday (>= 0.8, < 0.16.0)
@@ -491,6 +493,7 @@ DEPENDENCIES
   haml
   jquery-rails
   kaminari
+  leaderboard
   listen (~> 3.1.5)
   mini_magick (= 4.7.0)
   mutations

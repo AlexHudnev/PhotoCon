@@ -21,7 +21,9 @@
   	    <div class="navbar-header ">
   	    <%= link_to 'PhotoCon', root_path, class: 'navbar-brand btn  text-white' %>
   	    </div>
-  	    <div id="navbar">
+<div><%= link_to 'Rating', rating_path , class: ' btn  text-white' %></div>
+        <div id="navbar">
+
           <% if current_user %>
  	        <ul class="nav navbar-inverse navbar-nav pull-right ">
 

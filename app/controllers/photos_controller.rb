@@ -4,6 +4,16 @@ class PhotosController < ApplicationController
     @photos = params[:sorting] ? Photo.page(params[:page]).reorder(params[:sorting]) : Photo.page(params[:page]).by_approve
   end
 
+  def rating
+    @pho = Photo.page(params[:page]).by_approve
+    redis_options = { :host => 'localhost', :port => 6379, :db => 1}
+    @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS, redis_options)
+    @pho.each do |photography|
+      @steps_lb.rank_member(photography.photo_name, photography.rating)
+    end
+    @steps_results = Kaminari.paginate_array((@steps_lb.all_leaders)).page(params[:page]).per(10)    
+  end
+
   def new
     @photo = Photo.new
   end

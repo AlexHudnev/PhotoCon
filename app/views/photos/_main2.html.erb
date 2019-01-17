@@ -17,11 +17,11 @@
   <%= image_tag photo.photography.url %><br></td>
  </tr>
  <tr>
-    <td>Rating:<%= photo.rating %></td>
+    <td>Rating:<span class="votes-count" data-id="<%= photo.id %>"><%= photo.rating %></span></td>
   </tr>
 <tr>
   <td><% if current_user %>
-      <%= form_for ([photo,photo.likes.build]) do |f| %>
+      <%= form_for [photo,photo.likes.build] do |f| %>
       <%= f.submit "♥",  class: ' btn-link btn'%>
       <% end %>
       <% end %>
