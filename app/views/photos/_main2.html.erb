@@ -17,11 +17,11 @@
   <%= image_tag photo.photography.url %><br></td>
  </tr>
  <tr>
-    <td>Rating:<span class="votes-count" data-id="<%= photo.id %>"><%= photo.rating %></span></td>
+    <td>Rating:<div class="votes-count-<%=photo.id%>" ><%= photo.rating %></div></td>
   </tr>
 <tr>
   <td><% if current_user %>
-      <%= form_for [photo,photo.likes.build] do |f| %>
+      <%= form_for [photo,photo.likes.build] , remote: true do |f| %>
       <%= f.submit "♥",  class: ' btn-link btn'%>
       <% end %>
       <% end %>
@@ -32,18 +32,17 @@
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent<%=photo.id%>">
     <div class="allcom p-4">
-    <% if photo.comments.any? %>
+
       <h5>All comments:</h5>
       <% @comments = photo.comments.order(updated_at: :desc, id: :asc) %>
       <% @printed_comment = [] %>
+      <div id="commentform" class="commentform-<%=photo.id%>">
       <%= render '/comments/comments', comments: @comments , photo: photo %>
-    <% else %>
-      <h5 align='right'>No comments here</h5>
-    <% end %>
+       </div>
 
     <% if current_user %>
 
-      <%= form_for([photo, photo.comments.build]) do |f| %>
+      <%= form_for [photo, photo.comments.build], remote: true do |f| %>
 
 
         <div class="comment"> <table >
@@ -53,7 +52,7 @@
 
                 <td >
                   <%= f.label 'Write comment' %><br>
-                  <%= f.text_area :body %>
+                  <%= f.text_area :body, class: 'commentinp' %>
                   <%= f.submit 'Post', class: '  btn' %>
                 </td>
               </tr>
@@ -67,7 +66,7 @@
   </div>
 
   <nav class="navbar ">
-    <div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Comments <%= photo.comment_count %></div>
+    <div class=" btn btn-link " data-toggle="collapse" data-target="#navbarToggleExternalContent<%=photo.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Comments </div>
   </nav>
 </div>
   </td>

@@ -1,0 +1,4 @@
+<% @comments = @photo.comments.order(updated_at: :desc, id: :asc) %>
+<% @printed_comment = [] %>
+$('.commentinp').val('');
+$('.commentform-<%=@photo.id%>').html("<%=  j (render 'comments/comments', comments: @comments , photo: @photo) %>");

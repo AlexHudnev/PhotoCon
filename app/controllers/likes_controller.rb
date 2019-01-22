@@ -6,8 +6,14 @@ class LikesController < ApplicationController
     @like.user_id = current_user.id
     if @like.valid?
       @like.save
+      respond_to do |format|
+        format.html do
+          redirect_to @photo
+        end
+        format.js # JavaScript response
+      end
     else
-      flash[:warning] = '!'
+      flash[:warning] = 'You cant like twice.'
       redirect_to root_path
     end
   end

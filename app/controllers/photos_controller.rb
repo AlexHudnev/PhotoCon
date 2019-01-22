@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
     @pho.each do |photography|
       @steps_lb.rank_member(photography.photo_name, photography.rating)
     end
-    @steps_results = Kaminari.paginate_array((@steps_lb.all_leaders)).page(params[:page]).per(10)    
+    @steps_results = Kaminari.paginate_array((@steps_lb.all_leaders)).page(params[:page]).per(10)
   end
 
   def new
@@ -32,7 +32,9 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id]).page(params[:page])
+    @photo = Photo.find(params[:id])
+    @comments = @photo.comments
+    @new_comment = @photo.comments.new
   end
 
   def search

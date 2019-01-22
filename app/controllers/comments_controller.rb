@@ -8,9 +8,16 @@ class CommentsController < ApplicationController
     @photo = Photo.find(params[:photo_id])
     @comment = @photo.comments.build(comment_params)
     @comment.user_id = current_user.id
-    @comment.save
-
-    redirect_to request.referer
+    if @comment.save
+      respond_to do |format|
+        format.html do
+          flash[:success] = 'Comment posted.'
+          redirect_to @photo
+        end
+        format.js # JavaScript response
+      end
+    end
+    #redirect_to request.referer
   end
 
   def create_sub_comment
