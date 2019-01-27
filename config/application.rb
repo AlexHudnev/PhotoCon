@@ -14,7 +14,8 @@ module PhotoCon
     config.active_job.queue_adapter = :sidekiq
     config.load_defaults 5.2
     ENV['VKONTAKTE_KEY'] = Rails.application.credentials.dig(:vkontakte_key)
-    ENV['VKONTAKTE_SECRET']  = Rails.application.credentials.dig(:vkontakte_secret)
+    ENV['VKONTAKTE_SECRET'] = Rails.application.credentials.dig(:vkontakte_secret)
+    ENV['REDIS_URL'] = Rails.application.credentials.dig(:redis_url)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
