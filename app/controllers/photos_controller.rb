@@ -6,7 +6,7 @@ class PhotosController < ApplicationController
 
   def rating
     @pho = Photo.page(params[:page]).by_approve
-    redis_options = { host: ENV['REDIS_URL'], port: 6379, db: 1 }
+    redis_options = {url: ENV['REDIS_URL'] }
     @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS, redis_options)
     @pho.each do |photography|
       @steps_lb.rank_member(photography.photo_name, photography.rating)
@@ -23,7 +23,7 @@ class PhotosController < ApplicationController
     @photo.rating = 0
     @photo.comment_count = 0
     @photo.save
-    if @photo.savegi
+    if @photo.save
       flash[:success] = 'Photo send to moderation'
       redirect_to root_path
     else
