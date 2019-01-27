@@ -6,8 +6,8 @@ class PhotosController < ApplicationController
 
   def rating
     @pho = Photo.page(params[:page]).by_approve
-    redis_options = {url: ENV['REDIS_URL'] }
-    @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS, redis_options)
+    #redis_options = {url: ENV['REDIS_URL'] }
+    @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS)
     @pho.each do |photography|
       @steps_lb.rank_member(photography.photo_name, photography.rating)
     end
