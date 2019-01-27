@@ -23,7 +23,7 @@ class PhotosController < ApplicationController
     @photo.rating = 0
     @photo.comment_count = 0
     @photo.save
-    if @photo.save
+    if @photo.savegi
       flash[:success] = 'Photo send to moderation'
       redirect_to root_path
     else
