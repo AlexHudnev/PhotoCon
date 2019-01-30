@@ -6,9 +6,6 @@ class RemovePhotoWorker
     photo = Photo.find(photo_id)
     if photo.banned?
       photo.remove_photography!
-      photo.likes.each { |like| like.destroy }
-      photo.comments.each { |comment| comment.destroy }
-      photo.destroy
       photo.destroy
     end
   end

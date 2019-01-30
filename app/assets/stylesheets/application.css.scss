@@ -1,6 +1,7 @@
 /*
+ *= require select2-bootstrap
  *= require_self
- *= require_tree .
+ *= require_tree.
 */
 
 @import "bootstrap";
@@ -27,7 +28,7 @@ background-color: white;
 .post
 {
 background-color:white;
-
+ 
 }
 .comment
 {

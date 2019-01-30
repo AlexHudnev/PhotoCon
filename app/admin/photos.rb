@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/api'
 ActiveAdmin.register Photo do
   index do
@@ -6,7 +8,7 @@ ActiveAdmin.register Photo do
     column :photo do |pg|
       image_tag pg.photography.url
     end
-    column 'Current Status', :aasm_state
+    state_column 'Current Status', :aasm_state
     column 'Moderation', :moderation do |pg|
       columns do
         if pg.aasm_state == 'moderated'

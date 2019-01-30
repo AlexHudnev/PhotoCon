@@ -1,8 +1,11 @@
-
+<div>
+  <br>
 <%= render 'sorting'%>
-
-<div class="pagination-lg ">
- <%= paginate @photos %>
+</div>
+<div>
+<br>
+<%= paginate @photos , :theme => 'twitter-bootstrap-4',
+                   :pagination_class => " pagination justify-content-end "%>
 </div>
 
 <% @photos.each do |photo| %>
@@ -17,9 +20,8 @@
   <%= image_tag photo.photography.url %><br></td>
  </tr>
  <tr>
-    <td>Rating:<div class="votes-count-<%=photo.id%>" ><%= photo.rating %></div></td>
-  </tr>
-<tr>
+    <td>Rating:</td> <td><div class="votes-count-<%=photo.id%>" ><%= photo.rating %></div></td>
+
   <td><% if current_user %>
       <%= form_for [photo,photo.likes.build] , remote: true do |f| %>
       <%= f.submit "♥",  class: ' btn-link btn'%>
@@ -77,6 +79,8 @@
    <% end %>
 
 
-    <div class="pagination-lg ">
-     <%= paginate @photos %>
-    </div>
+   <div>
+
+   <%= paginate @photos , :theme => 'twitter-bootstrap-4',
+                      :pagination_class => " pagination justify-content-end "%>
+   </div>

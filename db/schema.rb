@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 2019_01_06_191606) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "rating"
+    t.integer "rating", default: 0, null: false
     t.string "aasm_state"
-    t.integer "comment_count"
+    t.integer "comment_count", default: 0, null: false
     t.index ["user_id", "created_at"], name: "index_photos_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_photos_on_user_id"
   end

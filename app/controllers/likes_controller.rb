@@ -2,10 +2,8 @@
 class LikesController < ApplicationController
   def create
     @photo = Photo.find(params[:photo_id])
-    @like = @photo.likes.build
-    @like.user_id = current_user.id
-    if @like.valid?
-      @like.save
+    outcome = CreateLike.run(photo: @photo, user: current_user)    
+    if outcome.valid?
       respond_to do |format|
         format.html do
           redirect_to @photo

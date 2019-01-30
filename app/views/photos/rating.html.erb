@@ -19,5 +19,10 @@
     <% end %>
   </table>
 </div>
- <%= paginate @steps_results %>
+<div>
+
+<%= paginate @steps_results , :theme => 'twitter-bootstrap-4',
+                   :pagination_class => " pagination justify-content-end "%>
+</div>
+
   <% end %>

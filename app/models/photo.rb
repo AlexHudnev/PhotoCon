@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
+# photo model
 class Photo < ApplicationRecord
   include AASM
   require 'kaminari'
   belongs_to :user
-  has_many :comments
-  has_many :likes
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   scope :by_approve, -> { where(aasm_state: :approved) }
   default_scope -> { order(created_at: :desc) }
   mount_uploader :photography, ImageUploader

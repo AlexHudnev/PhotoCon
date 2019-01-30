@@ -1,17 +1,23 @@
 
-<div class="searcpanel">
-  <table> <tr><td>Sort photo by:
- <div ><%= link_to 'Date (Old to new)', photos_path(sorting: 'created_at ASC', search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
- <%= link_to 'Date (New to old)',photos_path(sorting: 'created_at DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
- <%= link_to 'Rating (High to low)', photos_path(sorting: 'rating DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
- <%= link_to 'Rating (Low to high)', photos_path(sorting: 'rating ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %>|
- <%= link_to 'Popularity (High to low)', photos_path(sorting: 'comment_count DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %> |
- <%= link_to 'Popularity (Low to high)', photos_path(sorting: 'comment_count ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %>
-</div></td>
+<div class="searcpanel navbar">
+<div class="dropdown">
+<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ Sort photo by:
+</button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<div class="dropdown-item"><%= link_to 'Date ▼', photos_path(sorting: 'created_at ASC', search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
+<div class="dropdown-item"><%= link_to 'Date ▲',photos_path(sorting: 'created_at DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
+<div class="dropdown-item"><%= link_to 'Rating ▼', photos_path(sorting: 'rating DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
+<div class="dropdown-item"><%= link_to 'Rating ▲', photos_path(sorting: 'rating ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
+<div class="dropdown-item"> <%= link_to 'Popularity ▼', photos_path(sorting: 'comment_count DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
+<div class="dropdown-item"><%= link_to 'Popularity ▲', photos_path(sorting: 'comment_count ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
+</div>
+</div>
 
- <td><div ><%= form_tag("search", method: "get") do %>
 
-           <%= text_field_tag(:q) %>
-           <%= submit_tag("Search") %>
-         <% end %></div></td></tr></table>
+  <%= form_tag("search", method: "get",class:"form-inline my-2 my-lg-0") do %>
+                <%= text_field_tag(:q,"",class:"form-control mr-sm-2") %>
+              <%= submit_tag("Search",class:"btn btn-outline-primary") %>
+            <% end %>
+
 </div>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # user controller
 class UsersController < ApplicationController
   def edit
