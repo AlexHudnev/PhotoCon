@@ -2,16 +2,19 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  namespace :api, defaults: { format: :json }  do
-    resources :users, only: [:index, :show] do
-      get '/photos',   to: 'photos#index'
-      resources :comments, only: :index, module: :users
+  namespace :api do
+    namespace :v1 do
+      resources :photos
+      resources :comments
+      resources :likes
+      resources :users
     end
-    resources :photos, only: [:index, :create, :show] do
-      resources :comments, only: [:create, :index], module: :photos
-      resources :likes, only: :create
-    end
+    resources :photos
+    resources :comments
+    resources :likes
+    resources :users
   end
+
   root 'photos#index'
   post 'photos', to: 'photos#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
