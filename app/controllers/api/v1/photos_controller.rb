@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        outcome = CreatePhoto.run(photo_name: params.fetch(:photo)[:photo_name],
+        outcome = CreatePhoto.run(name: params.fetch(:photo)[:name],
                                   photography: params.fetch(:photo)[:photography],
                                   user: current_user)
         if outcome.valid?

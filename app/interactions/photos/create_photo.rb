@@ -2,18 +2,18 @@
 
 # create photo
 class CreatePhoto < ActiveInteraction::Base
-  string :photo_name
+  string :name
   file :photography
   object :user
 
-  validates :photo_name, presence: true
+  validates :name, presence: true
 
   def to_model
     Photo.new
   end
 
   def execute
-    photo = user.photos.create!(photo_name: photo_name,photography: photography)
+    photo = user.photos.create!(name: name,photography: photography)
     unless photo.save
       errors.merge!(photo.errors)
     end

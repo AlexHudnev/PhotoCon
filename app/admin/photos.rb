@@ -4,9 +4,9 @@ require 'sidekiq/api'
 ActiveAdmin.register Photo do
   index do
     selectable_column
-    column :photo_name
+    column :name
     column :photo do |pg|
-      image_tag pg.photography.url
+      image_tag pg.photography.admin.url
     end
     state_column 'Current Status', :aasm_state
     column 'Moderation', :moderation do |pg|

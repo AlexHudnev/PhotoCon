@@ -1,0 +1,53 @@
+<style>
+  body {
+   background:#1d1d1d;
+  }
+ </style>
+</div>
+<br>
+
+
+         <% @photos.each do |photo| %>
+         <div clss="col offset-md-4 "
+            <% if photo.aasm_state == 'approved' %>
+
+            <% user = User.find(photo.user_id) %>
+
+             <div class="  single_portfolio_text shadow">
+                <%= image_tag photo.photography.galery.url %>
+                 <div class="portfolio_images_overlay ">
+                   <a href=<%=photo_path(photo)%>><h6 class="clrd-font text-center">
+                     <%= photo.name %></h6></a>
+                   <div class="col-lg  text-danger">Author: <%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></div>
+
+
+
+
+                    <div class="col  text-primary"><span class="text-danger" >Likes: </span><span class="votes-count-<%=photo.id%> " ><%= photo.rating %></span> </div>
+<br>
+
+                      <div class="col col-sm  ">
+                        <div class="text-center">
+                          <% if current_user %>
+                        <%= form_for [photo,photo.likes.build] , remote: true do |f| %>
+                        <%= f.submit "♥",  class: '  btn btn-lg btn-outline-danger'%>
+                        <% end %>
+                        <% end %>
+
+                      </div>
+
+
+                 </div>
+
+             </div>
+</div>
+       </div>
+       <% end %>
+       </div>
+       <% end %>
+
+       <div>
+       <br>
+       <%= paginate @photos , :theme => 'twitter-bootstrap-4',
+                          :pagination_class => " pagination pagination-sm  text-white justify-content-center "%>
+       </div>

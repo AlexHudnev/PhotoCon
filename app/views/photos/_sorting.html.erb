@@ -1,7 +1,7 @@
 
 <div class="searcpanel navbar">
 <div class="dropdown">
-<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
  Sort photo by:
 </button>
 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -17,7 +17,7 @@
 
   <%= form_tag("search", method: "get",class:"form-inline my-2 my-lg-0") do %>
                 <%= text_field_tag(:q,"",class:"form-control mr-sm-2") %>
-              <%= submit_tag("Search",class:"btn btn-outline-primary") %>
+              <%= submit_tag("Search",class:"btn btn-outline-secondary") %>
             <% end %>
 
 </div>

@@ -4,7 +4,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  process resize_to_limit: [400, 400]
+
   if Rails.env.production?
     storage :fog
   else
@@ -16,6 +16,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+
+  version :admin do
+    process resize_to_limit: [100, 100]
+  end
+  version :galery do
+    process resize_to_fill: [400, 400]
+  end
+  version :show do
+    process resize_to_limit: [400, 400]
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

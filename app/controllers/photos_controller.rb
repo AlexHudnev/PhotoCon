@@ -10,9 +10,14 @@ class PhotosController < ApplicationController
     @pho = Photo.page(params[:page]).by_approve
     @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS)
     @pho.each do |photography|
-      @steps_lb.rank_member(photography.photo_name, photography.rating)
+      @steps_lb.rank_member(photography.name, photography.rating)
     end
     @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(10)
+  end
+
+  def galery
+    @photos = Photo.page(params[:page]).by_approve.by_rating
+
   end
 
   def new
@@ -20,7 +25,7 @@ class PhotosController < ApplicationController
   end
 
   def create
-    outcome = CreatePhoto.run(photo_name: params.fetch(:photo)[:photo_name],
+    outcome = CreatePhoto.run(name: params.fetch(:photo)[:name],
                               photography: params.fetch(:photo)[:photography],
                               user: current_user)
     if outcome.valid?
@@ -39,7 +44,7 @@ class PhotosController < ApplicationController
 
   def search
     ids = []
-    Photo.all.each {|n| ids << n.id if n.photo_name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
+    Photo.all.each {|n| ids << n.id if n.name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
     @photos = Photo.where(id: ids, aasm_state: :approved).page(params[:page])
     flash.now[:warning] = "we can't find it '#{params[:q]}'" unless @photos.any?
   end

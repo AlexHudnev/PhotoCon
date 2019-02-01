@@ -1,5 +1,5 @@
 class PhotoSerializer < ActiveModel::Serializer
-  attributes :id, :photo_name, :photography, :rating, :user_id
+  attributes :id, :name, :photography, :rating, :user_id
 
   def photo_url
     object.photo.url

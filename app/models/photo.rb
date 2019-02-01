@@ -9,9 +9,10 @@ class Photo < ApplicationRecord
   has_many :likes, dependent: :destroy
   scope :by_approve, -> { where(aasm_state: :approved) }
   default_scope -> { order(created_at: :desc) }
+  scope :by_rating, -> { reorder(rating: :desc) }
   mount_uploader :photography, ImageUploader
   validates :user_id, presence: true
-  validates :photo_name, presence: true, length: { maximum: 64, minimum: 3 }
+  validates :name, presence: true, length: { maximum: 64, minimum: 3 }
   validates :photography, presence: true
 
   aasm do

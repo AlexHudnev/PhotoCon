@@ -16,12 +16,13 @@
   </head>
 
   <body>
-     <nav class="navbar navbar-expand-lg navbar-light bg-darck  navbar-custom">
+     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary  ">
   	  <div class="container">
   	    <div class="navbar-header ">
   	    <%= link_to 'PhotoCon', root_path, class: 'navbar-brand btn  text-white' %>
   	    </div>
-<div><%= link_to 'Rating', rating_path , class: ' btn  text-white' %></div>
+<div><%= link_to 'Rating', rating_path , class: '    btn btn-secondary' %></div>
+<div><%= link_to 'Galery', galery_path , class: '  btn btn-secondary' %></div>
         <div id="navbar">
 
           <% if current_user %>
@@ -29,7 +30,7 @@
 
 
             <li class="nav-item dropdown">
-              <div class="btn btn-lg align-middle btn-custom  dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="btn btn-lg align-middle btn btn-secondary dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		 <%=current_user.first_name %>
           <%= image_tag current_user.image_url, alt: current_user.first_name %>
         </div>
@@ -45,23 +46,14 @@
   	  </div>
   	</nav>
 
-  	<div class="container">
+    <div class=" container">
   	  <% flash.each do |key, value| %>
-  	    <div class="alert alert-<%= key %>">
+  	    <span class="alert alert-<%= key %>">
   	      <%= value %>
-  	    </div>
+  	    </span>
   	  <% end %>
 
   	  <%= yield %>
   	</div>
-
-
-
-
-
-
-
-
-
   </body>
 </html>
