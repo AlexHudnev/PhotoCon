@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
     @pho = Photo.page(params[:page]).by_approve
     @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS)
     @pho.each do |photography|
-      @steps_lb.rank_member(photography.name, photography.rating)
+      @steps_lb.rank_member(photography.id, photography.rating)
     end
     @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(10)
   end

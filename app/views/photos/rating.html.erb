@@ -6,13 +6,18 @@
   <table class="table table-dark">
     <tr>
       <th>Rank</th>
-      <th class="middle_col">Photoname</th>
+      <th>Photo</th>
+      <th class="middle_col">Name</th>
       <th> Rating </th>
     </tr>
     <% @steps_results.each do |member| %>
+
+       <% photo = Photo.find(member[:member]) %>
       <tr>
         <td><%= member[:rank] %></td>
-        <td class="middle_col"><%= member[:member] %></td>
+        <td>  <%= image_tag photo.photography.admin.url %></td>
+        <td class="middle_col"> <%= photo.name %>
+        </td>
           <td><%= member[:score] %></td>
 
       </tr>
