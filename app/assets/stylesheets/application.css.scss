@@ -25,11 +25,7 @@ background-color: white;
 
   }
 }
-.post
-{
-background-color:white;
- 
-}
+
 .comment
 {
 img {
@@ -38,8 +34,8 @@ img {
 
   }
 hyphens: auto;
- background-color:white;
-border-bottom: 1px solid lightgray;
+ 
+
 
 }
 
@@ -51,25 +47,7 @@ border: 1px solid gray;
 
 }
 
-.btn-custom
-{
-margin: 0px;
-padding: 0px;
-border: 0px;
-background-color: #4c75a3;
-text-decoration: none;
-font-size: 200%;
-color:black;
 
-}
-.btn-custom:hover
-{
-border: 0px;
-background-color: #45688E;
-text-decoration: none;
-font-size: 200%;
-color:white;
-}
 
 
 
@@ -80,13 +58,7 @@ font-size: 200%;
 
 }
 
-container {
-	.jimbotron {
-	  display: inline !important;
-	  position: relative !important;
-	 background:#ffffff; 
-	}
-}
+
 
 
 
@@ -129,12 +101,178 @@ container {
 	padding-bottom: 10px;
 }
 
-.portfolio_images_overlay .product_price{
-	font-size: 35px;
-	color: #fff;
-	font-weight:800;
-	line-height:30px;
+.btn-xl {
+    
+    width: 160px;
+    height: 160px;
+    font-size: 100px;
+    border-radius: 8px;
 }
-.portfolio_images_overlay .product_price i{
-    margin-right: -10px;
+
+ .modal-dialog
+{
+background-color: transparent;
 }
+.modal-content {
+    width: 100% ;
+    background-color: transparent;
+}
+
+.modal-header
+{
+background: rgba(0, 0, 0, 0.5);
+}
+.modal-body
+{
+ width: 100% ;
+ background: rgba(0, 0, 0, 0.33);
+ 
+}
+
+.modal-body img
+{
+width:100%;	        
+}
+
+
+
+.hero {	
+  margin: 0px !important;
+}
+.cardbox {
+  border-radius: 3px;
+  margin-bottom: 20px;
+  padding: 0px !important;
+}
+
+/* ------------------------------- */
+/* Cardbox Heading
+---------------------------------- */
+.cardbox .cardbox-heading {
+  padding: 16px;
+  margin: 0;
+}
+
+
+/* ------------------------------- */
+/* Media Section
+---------------------------------- */
+.media {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+.d-flex {
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+.media .mr-3{
+  margin-right: 1rem !important;
+}
+.media img{
+  width: 48px !important;
+  height: 48px !important;
+  padding: 2px;
+  border: 2px solid #f4f4f4;
+} 
+.media-body {
+  -ms-flex: 1;
+  flex: 1;
+  padding: .4rem !important;
+}
+.media-body p{
+  font-family: 'Rokkitt', serif;	
+  font-weight: 500 !important;
+  font-size: 14px;
+  color: #88898a;
+}
+.media-body small span{
+  font-family: 'Rokkitt', serif;	
+  font-size: 12px;
+  color: #aaa;
+  margin-right: 10px;
+}
+
+
+/* ------------------------------- */
+/* Cardbox Item
+---------------------------------- */
+.cardbox .cardbox-item {
+    position: relative;
+    display: block;
+}
+.cardbox .cardbox-item img{
+}
+.img-responsive{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}	
+.fw {
+    width: 100% !important;
+	height: auto;
+}
+
+
+/* ------------------------------- */
+/* Cardbox Base
+---------------------------------- */
+.cardbox-base{
+ border-bottom: 2px solid #f4f4f4;
+}	
+
+
+/* ------------------------------- */
+/* Cardbox Comments
+---------------------------------- */
+.cardbox-comments{
+  padding: 10px 40px 20px 40px !important;
+  
+}
+ .comment-avatar img{
+  margin-top: 1px;
+  margin-right: 10px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+}
+.cardbox-comments .comment-body {
+  overflow: auto;
+}
+
+
+.search button i {
+ font-size: 20px;
+ line-height: 30px;
+ display: block;
+}
+
+
+.title {
+    font-size: 14px;
+    font-weight:bold;
+}
+.komen {
+ 
+    font-size:14px;
+}
+.geser {
+    margin-left:55px;
+    margin-top:5px;
+}
+
+.media1
+{
+
+background: rgba(0, 0, 0, 0.05);
+color:#fffff !important;
+}
+
+
+
+
+
+

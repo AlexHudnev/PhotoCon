@@ -37,7 +37,7 @@ Rails.application.configure do
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
-
+  config.assets.image_optim = false
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
@@ -54,7 +54,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-config.debug_exception_response_format = :api
+  config.debug_exception_response_format = :api
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker

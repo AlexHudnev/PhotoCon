@@ -15,7 +15,7 @@
        <% photo = Photo.find(member[:member]) %>
       <tr>
         <td><%= member[:rank] %></td>
-        <td>  <%= image_tag photo.photography.admin.url %></td>
+        <td>  <%= image_tag photo.photography.rating.url %></td>
         <td class="middle_col"> <%= photo.name %>
         </td>
           <td><%= member[:score] %></td>

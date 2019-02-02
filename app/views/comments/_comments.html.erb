@@ -1,42 +1,44 @@
-  <% if comments.any? %>
+
 <% comments.each do |commen| %>
 
 
 
 <% unless @printed_comment.include?(commen.id) %>
+ <% user = User.find(commen.user_id.to_i) %>
 
-             <div class="comment">
-               <table>
-                 <tr> <td rowspan="3"  width='50'>  <% user = User.find(commen.user_id.to_i) %>
-                     <%= image_tag user.image_url, alt: user.first_name %></td>
-                       <td><%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></td></tr>
-                       <tr><td> <%=simple_format(commen.body) %></td></tr>
 
-                       <tr><td> <%= commen.created_at %>
-                         <div class="pos-f-t">
-                           <div class="collapse" id="navbarComment<%=commen.id%>">
-                             <div class="allcom p-4">
 
-                        <%= render '/comments/comments', comments: commen.sub_comments if commen.sub_comments %>
-                      </div></div></div>
-                      <% if commen.sub_comments %>
-                         <nav class="navbar ">
-                         <div class=" btn btn-link " data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Responds </div>
+            <div class="container">
 
-                         </nav>
 
-                       </td>   </tr> <%end%> <tr><td> <% if current_user %> <%= link_to 'Respond ', new_user_photo_comment_comment_path(parent_comment_id: commen, user_id: current_user, photo_id: commen.photo_id) %></td></tr>
-<%else%>
+             <div class="media ">
+                <div class="media-left comment">
+                    <%= image_tag user.image_url, alt: user.first_name %>
+                </div>
+                <div class="media-body  media1">
+                  <h4 class="media-heading title"><%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></h4>
+                  <p class="komen text-body ">
+                        <%=simple_format(commen.body) %>
+</p>
+                        <span class=" btn-sm btn-link   " data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Responds </span>
+                       <span class=" btn-sm btn-link "><% if current_user %> <%= link_to 'Respond ', new_user_photo_comment_comment_path(parent_comment_id: commen, user_id: current_user, photo_id: commen.photo_id) %></span>
+
+               <hr>
+
+                </div>
+            </div>
+  <div class="collapse" id="navbarComment<%=commen.id%>">
+            <div class="geser">
+ <%= render '/comments/comments', comments: commen.sub_comments if commen.sub_comments %>
+            </div>
+</div>
+
+            </div>
+
+
+            <% @printed_comment << commen.id %>
+            <% end %>
 
 <% end %>
-               </table>
- </div>
-             <% @printed_comment << commen.id %>
-             <% end %>
 
-
-
-<% end %>
-<% else %>
-  <h5 align='right'>No comments here</h5>
-<% end %>
+            <% end %>

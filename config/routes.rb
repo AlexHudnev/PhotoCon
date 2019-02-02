@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   get 'search', to: 'photos#search'
   match '/rating', to: 'photos#rating', via: 'get'
   match '/galery', to: 'photos#galery', via: 'get'
-  match '/photo', to: 'photos#show', via: 'get'
+  match '/photo/:id', to: 'photos#show', via: 'get'
+
   post '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/comments', to: 'comments#create', as: 'user_photo_comment_comments'
   get '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/new', to: 'comments#new', as: 'new_user_photo_comment_comment'
   resources :users

@@ -1,20 +1,46 @@
 <% parent_comment = Comment.find(params[:parent_comment_id])%>
 <% photo = Photo.find(params[:photo_id]) %>
-<% parent_comment.body.each_line do |line|  %>
-  <br><span> <%= line %> </span>
-<% end %>
 
-<%= form_for ([current_user, photo, parent_comment, photo.comments.build]) do |f| %>
-<div class="comment"> <table >
-   <tr> <td   width='50'>
-       <%= image_tag current_user.image_url, alt:  current_user.first_name %></td>
+<% user = User.find(parent_comment.user_id) %>
 
-            <td >
-              <%= f.label 'Write comment' %><br>
-              <%= f.text_area :body %>
+<br>
+<div class="container">
 
 
+ <div class="media col">
+    <div class="media-left comment">
+        <%= image_tag user.image_url, alt: user.first_name %>
+    </div>
+    <div class="media-body  media1">
+      <h4 class="media-heading title"><%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></h4>
+      <p class="komen text-body ">
+            <%=simple_format(parent_comment.body) %>
+</p>
 
-              <%= f.submit 'Post', class: '  btn' %>
-            </td></tr></table></div>
-          <% end %>
+    </div>
+
+
+
+
+</div>
+</div>
+
+<div class="geser col">
+
+  <%= form_for ([current_user, photo, parent_comment, photo.comments.build]) do |f| %>
+  <div class="comment"> <table >
+     <tr> <td   width='50'>
+         <%= image_tag current_user.image_url, alt:  current_user.first_name %></td>
+
+              <td >
+                <%= f.label 'Reply to comment' %><br>
+                <%= f.text_area :body %>
+
+
+
+                <%= f.submit 'Post', class: '  btn' %>
+              </td></tr></table></div>
+            <% end %>
+
+
+</div>
