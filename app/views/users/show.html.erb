@@ -1,0 +1,60 @@
+<br>
+
+                <div class="card">
+                <%= image_tag @user.image_url, alt:  @user.first_name , style:"width:100%"%>
+                  <br>
+                  <h3><b><%= @user.first_name%> <%=@user.last_name %></b></h3>
+                  <hr>
+                  <p class="title">email: <%= @user.email %></p>
+                  <p></p>
+
+                  <p><%= link_to "Social net profile", @user.url,class: ' btn-primery' %></p>
+                
+<hr>
+                <h6> User gallery</h6>
+  <div id="carousel" class="carousel slide carousel-fade z-depth-1-half single_portfolio_text text-center" data-ride="carousel">   
+    
+
+    <div class="carousel-inner text-center" role="listbox">
+      <div class="carousel-item active text-center">
+        <div class="view single_portfolio_text">
+            
+<%=  image_tag("log.png", alt: "Photocon logo")  %>
+          <div class="mask rgba-black-light"></div>
+        </div>
+        <div class="carousel-caption">
+
+          <h3 class="h3-responsive">All user photos</h3>
+          
+        </div>
+      
+
+
+    </div>
+    <% @photos.each do |photo| %>
+       <%  if photo.user_id == @user.id %>
+    
+      <div class="carousel-item text-center">
+        <div class="view single_portfolio_text">
+            <a  href=<%=photo_path(photo)%>> <%= image_tag photo.photography.gallery.url ,class:"d-block " %></a>
+
+          <div class="mask rgba-black-light"></div>
+        </div>
+      
+      </div>
+    
+    <%end%>
+    <%end%>
+</div>
+    
+    <a class="carousel-control-prev text-left" href="#carousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next text-danger text-right" href="#carousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    
+  </div></div>
+

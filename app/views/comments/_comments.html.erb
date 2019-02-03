@@ -16,7 +16,7 @@
                     <%= image_tag user.image_url, alt: user.first_name %>
                 </div>
                 <div class="media-body  media1">
-                  <h4 class="media-heading title"><%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></h4>
+                  <h4 class="media-heading title"> <%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></h4>
                   <p class="komen text-body ">
                         <%=simple_format(commen.body) %>
 </p>

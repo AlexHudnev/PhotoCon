@@ -15,7 +15,7 @@ class PhotosController < ApplicationController
     @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(10)
   end
 
-  def galery
+  def gallery
     @photos = Photo.page(params[:page]).by_approve.by_rating
 
   end

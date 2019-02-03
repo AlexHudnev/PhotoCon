@@ -28,7 +28,7 @@
         </a>
        </div>
        <div class="media-body">
-        <p class="m-0"> <%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></p>
+        <p class="m-0"> <%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></p>
       <small><span><i class="icon ion-md-pin"></i> <%= photo.name%></span></small>
       <small><span><i class="icon ion-md-time"></i> <%= photo.updated_at.strftime("%H:%M %B %d, %Y")%></span></small>
        </div>

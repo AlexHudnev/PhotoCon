@@ -6,6 +6,7 @@
   <table class="table table-dark">
     <tr>
       <th>Rank</th>
+      <th>Author</th>
       <th>Photo</th>
       <th class="middle_col">Name</th>
       <th> Rating </th>
@@ -13,15 +14,19 @@
     <% @steps_results.each do |member| %>
 
        <% photo = Photo.find(member[:member]) %>
-      <tr>
+      <% user = User.find(photo.user_id) %>
+             <tr>
         <td><%= member[:rank] %></td>
-        <td>  <%= image_tag photo.photography.rating.url %></td>
+
+        <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></td>
+        <td>    <a  href=<%=photo_path(photo)%>><%= image_tag photo.photography.rating.url %></a></td>
         <td class="middle_col"> <%= photo.name %>
         </td>
           <td><%= member[:score] %></td>
 
       </tr>
     <% end %>
+
   </table>
 </div>
 <div>

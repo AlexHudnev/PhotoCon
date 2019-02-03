@@ -16,12 +16,12 @@
             <% user = User.find(photo.user_id) %>
 
              <div class="  single_portfolio_text shadow">
-                <%= image_tag photo.photography.galery.url %>
+                <%= image_tag photo.photography.gallery.url %>
 
                  <div class="portfolio_images_overlay " >
                    <a href=<%=photo_path(photo)%>><h6 class="clrd-font text-center">
                      <%= photo.name %></h6></a>
-                   <div class="col-lg  text-danger">Author: <%= link_to "#{user.first_name} #{user.last_name}", user.url,class: '' %></div>
+                   <div class="col-lg  text-danger">Author: <%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></div>
 
 
 
