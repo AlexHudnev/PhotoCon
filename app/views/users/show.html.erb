@@ -12,12 +12,12 @@
                 
 <hr>
                 <h6> User gallery</h6>
-  <div id="carousel" class="carousel slide carousel-fade z-depth-1-half single_portfolio_text text-center" data-ride="carousel">   
+  <div id="carousel" class="carousel slide carousel-fade z-depth-1-half single_portfolio_text text-center" data-ride="carousel" style="margin-left:0px;">   
     
 
     <div class="carousel-inner text-center" role="listbox">
       <div class="carousel-item active text-center">
-        <div class="view single_portfolio_text">
+        <div class="view single_portfolio_text" style="margin-left:0px;">
             
 <%=  image_tag("log.png", alt: "Photocon logo")  %>
           <div class="mask rgba-black-light"></div>
@@ -35,7 +35,7 @@
        <%  if photo.user_id == @user.id %>
     
       <div class="carousel-item text-center">
-        <div class="view single_portfolio_text">
+        <div class="view single_portfolio_text" style="margin-left:0px;">
             <a  href=<%=photo_path(photo)%>> <%= image_tag photo.photography.gallery.url ,class:"d-block " %></a>
 
           <div class="mask rgba-black-light"></div>

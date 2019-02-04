@@ -21,6 +21,7 @@ class Photo < ApplicationRecord
     state :banned
     event :approve do
       transitions from: :moderated, to: :approved
+      transitions from: :banned, to: :approved
     end
 
     event :ban do
@@ -28,8 +29,5 @@ class Photo < ApplicationRecord
       transitions from: :approved, to: :banned
     end
 
-    event :allow do
-      transitions from: :banned, to: :approved
-    end
   end
 end

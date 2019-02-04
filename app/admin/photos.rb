@@ -24,7 +24,7 @@ ActiveAdmin.register Photo do
           end
         else
           column do
-            link_to 'Allow', allow_admin_photo_path(pg)
+            link_to 'Approve', approve_admin_photo_path(pg)
           end
         end
       end
@@ -40,11 +40,6 @@ ActiveAdmin.register Photo do
   member_action :ban do
     resource.ban!
     RemovePhotoWorker.perform_in(20.minutes, params[:id])
-    redirect_to admin_photos_path
-  end
-
-  member_action :allow do
-    resource.allow!
     redirect_to admin_photos_path
   end
 end

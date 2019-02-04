@@ -13,6 +13,7 @@ class PhotosController < ApplicationController
       @steps_lb.rank_member(photography.id, photography.rating)
     end
     @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(10)
+    @steps_lb.delete_leaderboard
   end
 
   def gallery
