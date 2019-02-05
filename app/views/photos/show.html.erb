@@ -14,6 +14,8 @@
 			 <h4 class="text-center">
 		 		<%= @photo.name %>
 		 	</h4>
+
+
       <div class="media m-0">
        <div class="d-flex mr-3">
       <a href=""><%= image_tag user.image_url, alt:  user.first_name, class:"img-fluid rounded-circle" %>
@@ -38,6 +40,12 @@
 					 <div class="col"><span class="votes-count-<%=@photo.id%>"><%= @photo.rating %></span><span> Likes</span>
 						 <%= f.submit "♥",  class: ' btn-link btn'%>
 					 <% end %>
+<%  if @photo.user_id == current_user.id %>
+<%= link_to 'Delete', 
+             photo_path(@photo.id), 
+                         method: :delete, 
+                         data: { confirm: 'Are you sure?' } %> 
+<% end %>
 </div>
            <% end %>
 

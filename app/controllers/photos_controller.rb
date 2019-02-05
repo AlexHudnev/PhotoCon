@@ -7,12 +7,12 @@ class PhotosController < ApplicationController
   end
 
   def rating
-    @pho = Photo.page(params[:page]).by_approve
+    @pho = Photo.by_approve
     @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS)
     @pho.each do |photography|
       @steps_lb.rank_member(photography.id, photography.rating)
     end
-    @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(10)
+    @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(6)
     @steps_lb.delete_leaderboard
   end
 
@@ -41,6 +41,13 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
+  end
+
+  def destroy
+    @photo = Photo.find(params[:id])
+    @photo.destroy
+    flash[:success] = 'Photo removed '
+    redirect_to root_path
   end
 
   def search

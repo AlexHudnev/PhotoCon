@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @photos = Photo.page(params[@user.uid]).by_approve
+    @photos = Photo.by_approve
   end
 
   def user_params
