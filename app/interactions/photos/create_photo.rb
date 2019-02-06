@@ -3,9 +3,9 @@
 # create photo
 class CreatePhoto < ActiveInteraction::Base
   string :name
-  file :photography
+  file :photography, default: nil
   object :user
-
+  string :remote_photography_url, default: nil
   validates :name, presence: true
 
   def to_model
@@ -13,7 +13,7 @@ class CreatePhoto < ActiveInteraction::Base
   end
 
   def execute
-    photo = user.photos.create!(name: name,photography: photography)
+    photo = user.photos.create!(name: name,photography: photography,remote_photography_url: remote_photography_url)
     unless photo.save
       errors.merge!(photo.errors)
     end

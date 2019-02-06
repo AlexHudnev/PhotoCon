@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   class << self
     def from_omniauth(auth_hash)
       unless user = User.where(uid: auth_hash['uid']).first
-        user = find_or_create_by(uid: auth_hash['uid'], access_token: auth_hash['provider'])
+        user = find_or_create_by(uid: auth_hash['uid'], access_token: auth_hash['credentials']['token'])
         user.first_name = auth_hash['info']['first_name']
         user.last_name = auth_hash['info']['last_name']
         user.email = auth_hash['info']['email'] if auth_hash['info']['email']

@@ -1,6 +1,8 @@
 <h1>Post new Photo</h1>
 <hr>
-<%= form_for :photo, url: photos_path do |f| %>
+
+
+<%= form_for :photo, url: photos_path, :remote => true  do |f| %>
 
 <form class="form-horizontal" role="form">
   <div class="form-group">
@@ -10,6 +12,22 @@
     </div>
     </div>
 
+<div class="collapse" id="upload">
+<div class="row">
+<% @collection.each do |item| %>
+
+
+<div class="col">
+<div class="card" style="width: 18rem;">
+  <a><img src="<%=item['src_big']%>" class="card-img-top " alt="..."> </a>
+   <%= f.radio_button :remote_photography_url, item['src_big'] %>
+
+  </div>
+</div>
+
+<%end%>
+</div>
+</div>
 
 
 
@@ -20,6 +38,8 @@
             <%= f.file_field :photography, accept: 'image/jpeg,image/gif,image/png' %>
             <label for="file1" class="text-left blockquote-footer ">Please choose a file on your computer.</label>
           </span>
+Or upload from VK
+<span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Open list </span>
         </div>
 
 
@@ -27,3 +47,5 @@
 <hr>
   <%= f.submit "Upload", class: "btn btn-secondary " %>
 <% end %>
+
+

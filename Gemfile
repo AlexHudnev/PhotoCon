@@ -34,6 +34,7 @@ gem 'select2-rails'
 gem 'sidekiq'
 gem 'turbolinks'
 gem 'uglifier'
+gem 'vkontakte_api'
 
 group :development, :test do
   gem 'byebug'

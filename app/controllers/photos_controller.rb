@@ -2,6 +2,7 @@
 
 # Controller for photo
 class PhotosController < ApplicationController
+
   def index
     @photos = params[:sorting] ? Photo.page(params[:page]).reorder(params[:sorting]) : Photo.page(params[:page]).by_approve
   end
@@ -23,11 +24,15 @@ class PhotosController < ApplicationController
 
   def new
     @photo = CreatePhoto.new
+    vk = VkontakteApi::Client.new(current_user.access_token)
+    @collection = vk.photos.get_all(extended: 0,photo_sizes:0,ovner_id: current_user.uid)
+    @collection.delete_at(0)
   end
 
-  def create
+  def create    
     outcome = CreatePhoto.run(name: params.fetch(:photo)[:name],
                               photography: params.fetch(:photo)[:photography],
+			      remote_photography_url: params.fetch(:photo)[:remote_photography_url],
                               user: current_user)
     if outcome.valid?
       @photo = outcome.result
