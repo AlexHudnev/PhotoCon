@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # like model
 class Like < ActiveRecord::Base
   belongs_to :photo, counter_cache: :rating

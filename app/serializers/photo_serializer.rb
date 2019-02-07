@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhotoSerializer < ActiveModel::Serializer
   attributes :id, :name, :photography, :rating, :user_id
 

@@ -2,30 +2,33 @@
 
 module Api
   module V1
-    class PhotosController < ApplicationController
+    # api photos controller
+    class PhotosController < ApiController
       layout false
       before_action :autorization, only: :create
 
       def index
         photos = Photo.approved
         photos = photos.from_user(params[:user_id]) if params[:user_id].present?
-        render json: photos, status: 200
+        render json: photos, status: :ok
       end
 
       def create
-        outcome = CreatePhoto.run(name: params.fetch(:photo)[:name],
-                                  photography: params.fetch(:photo)[:photography],
-                                  user: current_user)
-        if outcome.valid?
-          render nothing: true, status: 201
-        else
-          render json: outcome.errors.symbolic, status: 422
-        end
+        validate Photos::Create.run(photo_params)
       end
 
       def show
         photo = Photo.approved.find(params[:id])
-        render json: photo, status: 200
+        render json: photo, status: :ok
+      end
+
+      private
+
+      def photo_params
+        { name: params.fetch(:photo)[:name],
+          photography: params.fetch(:photo)[:photography],
+          remote_photography_url: params.fetch(:photo)[:remote_photography_url],
+          user: current_user }
       end
     end
   end

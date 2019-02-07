@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # session controller
 class SessionControllerController < ApplicationController
   def create

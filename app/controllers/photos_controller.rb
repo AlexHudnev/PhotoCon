@@ -23,17 +23,14 @@ class PhotosController < ApplicationController
   end
 
   def new
-    @photo = CreatePhoto.new
+    @photo = Photos::Create.new
     vk = VkontakteApi::Client.new(current_user.access_token)
     @collection = vk.photos.get_all(extended: 0,photo_sizes:0,ovner_id: current_user.uid)
     @collection.delete_at(0)
   end
 
-  def create    
-    outcome = CreatePhoto.run(name: params.fetch(:photo)[:name],
-                              photography: params.fetch(:photo)[:photography],
-			      remote_photography_url: params.fetch(:photo)[:remote_photography_url],
-                              user: current_user)
+  def create
+    outcome = Photos::Create.run(photo_params)
     if outcome.valid?
       @photo = outcome.result
       flash[:success] = 'Photo send to moderation '
@@ -60,5 +57,14 @@ class PhotosController < ApplicationController
     Photo.all.each {|n| ids << n.id if n.name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
     @photos = Photo.where(id: ids, aasm_state: :approved).page(params[:page])
     flash.now[:warning] = "we can't find it '#{params[:q]}'" unless @photos.any?
+  end
+
+  private
+
+  def photo_params
+    { name: params.fetch(:photo)[:name],
+      photography: params.fetch(:photo)[:photography],
+      remote_photography_url: params.fetch(:photo)[:remote_photography_url],
+      user: current_user }
   end
 end
