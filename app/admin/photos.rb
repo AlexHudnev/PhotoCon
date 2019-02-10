@@ -32,6 +32,24 @@ ActiveAdmin.register Photo do
     actions
   end
 
+  show do
+    attributes_table do
+      photo = Photo.find_by(id: params[:id])
+      row :photography do |ad|
+        image_tag ad.photography.show.url
+      end
+      row :name
+      row :user_id do
+        link_to('Author', admin_user_path(photo.user_id))
+      end
+      row :rating
+      row :created_at
+      row :updated_at
+      row :id
+      row :aasm_state
+    end
+    active_admin_comments
+  end
   member_action :approve do
     resource.approve!
     redirect_to admin_photos_path

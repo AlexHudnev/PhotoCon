@@ -14,6 +14,8 @@ module Api
       end
 
       def create
+        return if current_user.moderator
+
         validate Photos::Create.run(photo_params)
       end
 

@@ -3,7 +3,7 @@
 # comments controller
 class CommentsController < ApplicationController
   def new
-    @comment = CreateComment.new
+    @comment = Comments::Create.new
   end
 
   def create

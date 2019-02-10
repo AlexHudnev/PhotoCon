@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Photos
-# create photo
   class Create < ActiveInteraction::Base
     string :name
     file :photography, default: nil
@@ -14,10 +13,9 @@ module Photos
     end
 
     def execute
-      photo = user.photos.create!(name: name,photography: photography, remote_photography_url: remote_photography_url)
-      unless photo.save
-        errors.merge!(photo.errors)
-      end
+      photo = user.photos.create!(name: name,photography: photography,
+                                  remote_photography_url: remote_photography_url)
+      errors.merge!(photo.errors) unless photo.save
     end
   end
 end

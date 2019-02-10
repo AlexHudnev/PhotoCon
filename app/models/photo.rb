@@ -28,6 +28,5 @@ class Photo < ApplicationRecord
       transitions from: :moderated, to: :banned
       transitions from: :approved, to: :banned
     end
-
   end
 end

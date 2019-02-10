@@ -2,7 +2,6 @@
 
 # Controller for photo
 class PhotosController < ApplicationController
-
   def index
     @photos = params[:sorting] ? Photo.page(params[:page]).reorder(params[:sorting]) : Photo.page(params[:page]).by_approve
   end
@@ -19,17 +18,21 @@ class PhotosController < ApplicationController
 
   def gallery
     @photos = Photo.page(params[:page]).by_approve.by_rating
-
   end
 
   def new
+    return root_path if current_user.moderator
+
     @photo = Photos::Create.new
-    vk = VkontakteApi::Client.new(current_user.access_token)
-    @collection = vk.photos.get_all(extended: 0,photo_sizes:0,ovner_id: current_user.uid)
-    @collection.delete_at(0)
+    vk = Vkontakte.new({ count: 100, ovner_id: current_user.uid,
+                         access_token: current_user.access_token,
+                         v: '5.9', page: 1 })
+    @collection = vk.get_all['response']['items']
   end
 
   def create
+    return root_path if current_user.moderator
+
     outcome = Photos::Create.run(photo_params)
     if outcome.valid?
       @photo = outcome.result
@@ -47,6 +50,8 @@ class PhotosController < ApplicationController
 
   def destroy
     @photo = Photo.find(params[:id])
+    return unless @photo.user_id == current_user.id
+
     @photo.destroy
     flash[:success] = 'Photo removed '
     redirect_to root_path
@@ -54,13 +59,26 @@ class PhotosController < ApplicationController
 
   def search
     ids = []
-    Photo.all.each {|n| ids << n.id if n.name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
+    Photo.all.each { |n| ids << n.id if n.name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
     @photos = Photo.where(id: ids, aasm_state: :approved).page(params[:page])
     flash.now[:warning] = "we can't find it '#{params[:q]}'" unless @photos.any?
   end
 
   private
 
+  # api
+  class Vkontakte
+    include HTTParty
+    base_uri 'https://api.vk.com'
+
+    def initialize(params)
+      @options = { query: params }
+    end
+
+    def get_all
+      self.class.get('/method/photos.getAll?', @options)
+    end
+  end
   def photo_params
     { name: params.fetch(:photo)[:name],
       photography: params.fetch(:photo)[:photography],

@@ -14,6 +14,7 @@ ActiveAdmin.register User do
       row :image do |ad|
         image_tag ad.image_url
       end
+      photos = Photo.where(user_id: params[:id])
       row :access_token
       row :uid
       row :first_name
@@ -22,6 +23,12 @@ ActiveAdmin.register User do
       row :created_at
       row :updated_at
       row :id
+      row :moderator
+      dropdown_menu 'Photos' do
+        photos.each do |photo|
+          item photo.name, admin_photo_path(photo)
+        end
+      end
     end
     active_admin_comments
   end

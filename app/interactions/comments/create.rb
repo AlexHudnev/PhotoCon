@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Comments
-# create comment
   class Create < ActiveInteraction::Base
     object :user
     object :photo
@@ -13,7 +12,8 @@ module Comments
     end
 
     def execute
-      photo.comments.create(body: body, user_id: user.id, parent_comment_id: parent_comment_id)
+      photo.comments.create(body: body, user_id: user.id,
+                            parent_comment_id: parent_comment_id)
     end
   end
 end

@@ -13,20 +13,23 @@
     </div>
 
 <div class="collapse" id="upload">
+  <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Close list </span>          
 <div class="row">
 <% @collection.each do |item| %>
 
-
+<%if item['photo_807']%>
 <div class="col">
-<div class="card" style="width: 18rem;">
-  <a><img src="<%=item['src_big']%>" class="card-img-top " alt="..."> </a>
-   <%= f.radio_button :remote_photography_url, item['src_big'] %>
+<div class="card" style="width: 20rem;">
+  <a><img src="<%=item['photo_807']%>" class="card-img-top new " alt="..."> </a>
+   <%= f.radio_button :remote_photography_url, item['photo_807'] %>
 
   </div>
 </div>
-
+<%end%>
 <%end%>
 </div>
+
+
 </div>
 
 
@@ -47,5 +50,3 @@ Or upload from VK
 <hr>
   <%= f.submit "Upload", class: "btn btn-secondary " %>
 <% end %>
-
-

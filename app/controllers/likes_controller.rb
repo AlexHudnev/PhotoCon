@@ -4,17 +4,26 @@
 class LikesController < ApplicationController
   def create
     @photo = Photo.find(params[:photo_id])
-    outcome = Likes::Create.run(photo: @photo, user: current_user)
-    if outcome.valid?
-      respond_to do |format|
-        format.html do
-          redirect_to @photo
-        end
-        format.js
+    Likes::Create.run(photo: @photo, user: current_user)
+    respond @photo
+    AchievementWorker.perform_async(@photo.id)
+  end
+
+  def destroy
+    like = Like.find(params[:id])
+    photo = Photo.find(like.photo_id)
+    return unless like.user_id == current_user.id
+
+    like.destroy
+    respond photo
+  end
+
+  def respond(photo)
+    respond_to do |format|
+      format.html do
+        redirect_to photo
       end
-    else
-      flash[:warning] = 'You cant like twice.'
-      redirect_to root_path
+      format.js
     end
   end
 end

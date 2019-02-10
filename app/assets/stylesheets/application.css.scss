@@ -313,9 +313,13 @@ height: 100px;
 }
 
 .carousel-control-prev-icon:after {
-  content: ' <';
+  content: '<';
   font-size: 55px;
   color: black;
 }
 
-
+.new {  
+    object-fit: cover;
+    width: 300px;
+    height: 300px;;  
+}

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
   post '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/comments', to: 'comments#create', as: 'user_photo_comment_comments'
   get '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/new', to: 'comments#new', as: 'new_user_photo_comment_comment'
   resources :users
+  resources :likes
   resources :photos do
     resources :comments
     resources :likes, only: [:create]
