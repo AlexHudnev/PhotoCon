@@ -7,6 +7,7 @@ module Photos
     object :user
     string :remote_photography_url, default: nil
     validates :name, presence: true
+    validate(:photography || :remote_photography_url)
 
     def to_model
       Photo.new
