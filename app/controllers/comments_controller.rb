@@ -9,14 +9,14 @@ class CommentsController < ApplicationController
   def create
     @photo = Photo.find(params[:photo_id])
     outcome = Comments::Create.run(comment_params)
-    if outcome.valid?
-      respond_to do |format|
-        format.html do
-          flash[:success] = 'Comment posted.'
-          redirect_to @photo
-        end
-        format.js
+    return unless outcome.valid?
+
+    respond_to do |format|
+      format.html do
+        flash[:success] = 'Comment posted.'
+        redirect_to @photo
       end
+      format.js
     end
   end
 

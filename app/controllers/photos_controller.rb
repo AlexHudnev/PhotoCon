@@ -3,13 +3,14 @@
 # Controller for photo
 class PhotosController < ApplicationController
   def index
-    @photos = params[:sorting] ? Photo.page(params[:page]).reorder(params[:sorting]) : Photo.page(params[:page]).by_approve
+    @photos = Photo.page(params[:page]).by_approve unless params[:sorting]
+    @photos = Photo.page(params[:page]).reorder(params[:sorting])
   end
 
   def rating
-    @pho = Photo.by_approve
+    @photo = Photo.by_approve
     @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS)
-    @pho.each do |photography|
+    @photo.each do |photography|
       @steps_lb.rank_member(photography.id, photography.rating)
     end
     @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(6)
@@ -24,10 +25,8 @@ class PhotosController < ApplicationController
     return root_path if current_user.moderator
 
     @photo = Photos::Create.new
-    vk = Vkontakte.new({ count: 100, ovner_id: current_user.uid,
-                         access_token: current_user.access_token,
-                         v: '5.9', page: 1 })
-    @collection = vk.get_all['response']['items']
+    vk = PhotosHelper::Vkontakte.new(api_params)
+    @collection = vk.getall['response']['items']
   end
 
   def create
@@ -58,31 +57,23 @@ class PhotosController < ApplicationController
   end
 
   def search
-    ids = []
-    Photo.all.each { |n| ids << n.id if n.name.mb_chars.downcase.include?(params[:q].mb_chars.downcase) }
+    ids = Photo.where('lower(name) LIKE ?', "%#{params[:q].mb_chars.downcase}%")
     @photos = Photo.where(id: ids, aasm_state: :approved).page(params[:page])
     flash.now[:warning] = "we can't find it '#{params[:q]}'" unless @photos.any?
   end
 
   private
 
-  # api
-  class Vkontakte
-    include HTTParty
-    base_uri 'https://api.vk.com'
-
-    def initialize(params)
-      @options = { query: params }
-    end
-
-    def get_all
-      self.class.get('/method/photos.getAll?', @options)
-    end
-  end
   def photo_params
     { name: params.fetch(:photo)[:name],
       photography: params.fetch(:photo)[:photography],
       remote_photography_url: params.fetch(:photo)[:remote_photography_url],
       user: current_user }
+  end
+
+  def api_params
+    { count: 100, ovner_id: current_user.uid,
+      access_token: current_user.access_token,
+      v: '5.9', page: 1 }
   end
 end

@@ -6,7 +6,7 @@ class LikesController < ApplicationController
     @photo = Photo.find(params[:photo_id])
     Likes::Create.run(photo: @photo, user: current_user)
     respond @photo
-    AchievementWorker.perform_async(@photo.id)
+    Comments::Acieve.run(photo: @photo) if @photo.rating == 3
   end
 
   def destroy
