@@ -11,11 +11,11 @@ class LikesController < ApplicationController
 
   def destroy
     like = Like.find(params[:id])
-    photo = Photo.find(like.photo_id)
+    @photo = Photo.find(like.photo_id)
     return unless like.user_id == current_user.id
 
     like.destroy
-    respond photo
+    respond @photo
   end
 
   def respond(photo)

@@ -1,0 +1,32 @@
+<%@photo = photo%>
+<div class="cardbox-base text-muted" id="likes" >
+  <% if current_user %>
+  <% like =  Like.find_by(user_id: current_user.id,photo_id: @photo.id)%>
+  <%  unless like %>
+      <%= form_for [@photo,@photo.likes.build] , remote: true do |f| %>
+
+      <div class="col"><span class=""><%= @photo.rating %></span><span> Likes</span>
+        <%= f.submit "♥",  class: ' btn-link btn text-danger like'%>
+      <% end %>
+<%else%>
+<div class="col"><span class=""><%= @photo.rating %></span><span> Likes</span>
+<%= link_to '♥',
+        like_path(like.id),
+                    method: :delete,
+                    class: 'text-black btn-link btn' %>
+<% end %>
+
+<%  if @photo.user_id == current_user.id %>
+<%= link_to 'Delete',
+        photo_path(@photo.id),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+<% end %>
+</div>
+<%else%>
+<span class=""><%= @photo.rating %></span><span> Likes</span>
+      <% end %>
+
+
+</div><!--/ cardbox-base -->
+</div>

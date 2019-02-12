@@ -13,7 +13,8 @@ class PhotosController < ApplicationController
     @photo.each do |photography|
       @steps_lb.rank_member(photography.id, photography.rating)
     end
-    @steps_results = Kaminari.paginate_array(@steps_lb.all_leaders).page(params[:page]).per(6)
+    lead = @steps_lb.all_leaders
+    @steps_results = Kaminari.paginate_array(lead).page(params[:page]).per(6)
     @steps_lb.delete_leaderboard
   end
 

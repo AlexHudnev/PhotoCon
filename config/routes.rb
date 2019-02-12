@@ -28,8 +28,10 @@ Rails.application.routes.draw do
   match '/gallery', to: 'photos#gallery', via: 'get'
   match '/photo/:id', to: 'photos#show', via: 'get'
   match '/user/:id', to: 'users#show', via: 'get'
-  post '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/comments', to: 'comments#create', as: 'user_photo_comment_comments'
-  get '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/new', to: 'comments#new', as: 'new_user_photo_comment_comment'
+  post '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/comments',
+       to: 'comments#create', as: 'user_photo_comment_comments'
+  get '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/new',
+      to: 'comments#new', as: 'new_user_photo_comment_comment'
   resources :users
   resources :likes
   resources :photos do

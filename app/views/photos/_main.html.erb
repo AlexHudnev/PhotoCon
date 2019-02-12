@@ -39,27 +39,10 @@
         <a  href=<%=photo_path(photo)%>> <%= image_tag photo.photography.show.url %></a>
 
      </div><!--/ cardbox-item -->
-     <div class="cardbox-base text-muted">
-       <% if current_user %>
-       <% like =  Like.find_by(user_id: current_user.id,photo_id: photo.id)%>
-       <%  unless like %>
-          <%= form_for [photo,photo.likes.build] , remote: true do |f| %>
+     <div class="cardbox-base text-muted votes-count-<%=photo.id%>">
 
-          <div class="col"><span class="votes-count-<%=photo.id%>"><%= photo.rating %></span><span> Likes</span>
-            <%= f.submit "♥",  class: ' btn-link btn text-danger like'%>
-          <% end %>
-<%else%>
- <div class="col"><span class="dislikevotes-count-<%=photo.id%>"><%= photo.rating %></span><span> Likes</span>
-<%= link_to '♥',
-             like_path(like.id),
-                         method: :delete,
-                         class: 'text-black btn-link btn' %>
-<% end %>
-
- </div> 
-          <% end %>
-
-     </div><!--/ cardbox-base -->
+<%= render '/likes/likes',  photo: photo %>
+     <!--/ cardbox-base -->
 
 <div>
   <div id="commentform" class="commentform-<%=photo.id%>">

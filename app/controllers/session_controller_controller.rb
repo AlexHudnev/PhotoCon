@@ -5,7 +5,7 @@ class SessionControllerController < ApplicationController
   def create
     begin
     @user = User.from_omniauth(request.env['omniauth.auth'])
-    if session[:user_id] = @user.id
+    if (session[:user_id] = @user.id)
       flash[:success] = "Hello, #{@user.first_name}!"
     else
       flash[:warning] = 'Some problems with auth...'
