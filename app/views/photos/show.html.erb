@@ -44,8 +44,7 @@
 
   <%= render '/comments/comments', comments: @comments , photo: @photo %>
    </div>
-
-
+   <%= link_to 'Share','http://vk.com/share.php?url=' +photo_url(@photo)+'&title='+@photo.name + '&noparse=false'  %>
 
         <% else %>
 
@@ -62,7 +61,7 @@
        <a href=""><%= image_tag current_user.image_url, alt:  current_user.first_name, class:"rounded-circle" %></a>
       </span>
       <div class=" container search">
-       <%= f.text_area :body, class: 'commentinp' ,placeholder:"Write a comment",size: "35x2"%>
+       <%= f.text_area :body, class: 'commentinp' ,placeholder:"Write a comment",size: "35x2" ,required: true%>
        <%= f.submit 'Post', class: '  btn-sm btn-primary text-right' %>
        <% end %>
      <% else %>

@@ -1,0 +1,8 @@
+<h1>PhotoCon</h1>
+
+<p>Hi <%= @user.first_name %>,</p>
+
+<p>
+Welcome from PhotoCon! Your photo status has been changed to: <%= @photo.aasm_state %>
+</p>
+<%= link_to "Сheck", photo_url(@photo) %>

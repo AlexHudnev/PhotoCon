@@ -1,0 +1,6 @@
+PhotoCon
+===============================================
+
+Hi <%= @user.first_name %>,
+Welcome from PhotoCon! Your photo status has been changed to: <%= @photo.aasm_state %>
+<%= link_to "Сheck", photo_url(@photo) %>

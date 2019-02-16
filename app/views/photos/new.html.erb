@@ -8,12 +8,12 @@
   <div class="form-group">
     <div class="col-lg-8">
       <%= f.label 'Title:' %> <br>
-      <%= f.text_field :name , class: 'form-control'%>
+      <%= f.text_field :name , class: 'form-control',placeholder:'Name',pattern:'[A-Za-zА-Яа-я0-9]{3,}' ,required: true%>
     </div>
     </div>
 
 <div class="collapse" id="upload">
-  <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Close list </span>          
+  <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Close list </span>
 <div class="row">
 <% @collection.each do |item| %>
 

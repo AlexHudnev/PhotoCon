@@ -48,6 +48,12 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
 
+  def share
+    @photo = Photo.find(params[:id])
+    au = 'http://vk.com/share.php?url=' +photo_url(@photo)+'title='+@photo.name + 'image='+ @photo.url
+    httparty au
+  end
+
   def destroy
     @photo = Photo.find(params[:id])
     return unless @photo.user_id == current_user.id

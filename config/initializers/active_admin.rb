@@ -142,6 +142,7 @@ ActiveAdmin.setup do |config|
   #
   config.batch_actions = true
 
+  config.download_links = %i[csv xml json xls]
   # == Controller Filters
   #
   # You can add before, after and around filters to all of your

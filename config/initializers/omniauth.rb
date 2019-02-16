@@ -3,7 +3,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
   provider :vkontakte, ENV['VKONTAKTE_KEY'], ENV['VKONTAKTE_SECRET'],
-           scope: %w[email photos offline]
+           scope: %w[email photos offline wall]
 end
 
 OmniAuth.config.on_failure do |env|

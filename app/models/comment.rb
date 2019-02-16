@@ -10,4 +10,5 @@ class Comment < ApplicationRecord
   belongs_to :parent_comment, class_name: 'Comment',
                               foreign_key: 'parent_comment_id',
                               optional: true
+  validates :body, presence: true, length: { minimum: 1 }
 end
