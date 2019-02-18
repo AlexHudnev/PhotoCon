@@ -22,6 +22,7 @@
                     method: :delete,
                     data: { confirm: 'Are you sure?' } %>
 <% end %>
+<%= link_to 'Share', @photo.share(request.original_url) , target: :_blank %>
 </div>
 <%else%>
 <span class=""><%= @photo.rating %></span><span> Likes</span>
