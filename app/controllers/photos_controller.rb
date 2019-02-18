@@ -9,8 +9,7 @@ class PhotosController < ApplicationController
 
   def rating
     @photo = Photo.by_approve
-    redis_options = {redis_connection: $redis }
-    @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS, redis_options)
+    @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS, set_redis)
     @photo.each do |photography|
       @steps_lb.rank_member(photography.id, photography.rating)
     end
@@ -72,6 +71,11 @@ class PhotosController < ApplicationController
     flash.now[:warning] = "we can't find it '#{params[:q]}'" unless @photos.any?
   end
 
+  def set_redis
+    uri = URI.parse(ENV['REDIS_URL'] || 'redis://localhost:6379/')
+    redis = Redis.new(url: uri)
+    {:redis_connection => redis}
+  end
   private
 
   def photo_params
