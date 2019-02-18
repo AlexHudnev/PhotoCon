@@ -48,10 +48,12 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
 
-  def share
-    @photo = Photo.find(params[:id])
-    au = 'http://vk.com/share.php?url=' +photo_url(@photo)+'title='+@photo.name + 'image='+ @photo.url
-    httparty au
+  def download_zip
+    date = Time.now.strftime('%d_%m_%Y_%H_%M')
+    zip_file = PhotosHelper::ZipPhotos.new
+    file = zip_file.make_zip
+    send_file file, type: 'application/zip', x_sendfile: true,
+                    disposition: 'attachment', filename: "#{date}.zip"
   end
 
   def destroy

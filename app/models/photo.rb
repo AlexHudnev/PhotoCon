@@ -15,6 +15,10 @@ class Photo < ApplicationRecord
   validates :name, presence: true, length: { maximum: 64, minimum: 3 }
   validates :photography, presence: true
 
+  def share(url)
+    ref = 'http://vk.com/share.php?url=' + url
+    ref + '&title=' + name + '&noparse=false'
+  end
   aasm do
     state :moderated, initial: true
     state :approved

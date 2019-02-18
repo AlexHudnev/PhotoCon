@@ -29,12 +29,14 @@ gem 'pg'
 gem 'rails', '5.2.1'
 gem 'redis'
 gem 'rubocop'
+gem 'rubyzip'
 gem 'sass-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'select2-rails'
 gem 'sidekiq'
 gem 'turbolinks'
 gem 'uglifier'
+gem 'zip-zip'
 
 group :development, :test do
   gem 'byebug'

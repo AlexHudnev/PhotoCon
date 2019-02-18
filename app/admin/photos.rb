@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 require 'sidekiq/api'
+require 'rubygems'
+require 'zip'
 ActiveAdmin.register Photo do
-  index do
+  action_item :add do
+    link_to 'Download all photos', download_zip_path, metod: :get
+  end
+  index  do
     selectable_column
     column :name
     column :photo do |pg|

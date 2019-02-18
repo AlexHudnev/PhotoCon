@@ -1,19 +1,28 @@
 # frozen_string_literal: true
 
-module UsersHelper
-  class Create
-    def execute(auth_hash, user)
-      return photo_acces(auth_hash, user) if user
+module Users
+  class Create < ActiveInteraction::Base
+    hash :auth_hash
+    object :user
 
-      user = User.create(uid: auth_hash['uid'],
-                         access_token: auth_hash['credentials']['token'])
+
+    def update
+      photo_acces
+    end
+
+    def execute
+      puts(auth_hash)
+      return update if user
+
+      user = create(uid: auth_hash['uid'],
+                    access_token: auth_hash['credentials']['token'])
       user.image_url = auth_hash['extra']['raw_info']['photo_200_orig']
       name_email_url auth_hash, user
     end
 
     private
 
-    def photo_acces(auth_hash, user)
+    def photo_acces
       user.access_token = auth_hash['credentials']['token']
       user.image_url = auth_hash['extra']['raw_info']['photo_200_orig']
       user.url = auth_hash['info']['urls']['Vkontakte']
