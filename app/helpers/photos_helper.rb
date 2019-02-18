@@ -20,7 +20,7 @@ module PhotosHelper
     def make_zip
       dir = "#{Rails.root}"
       dir = 'https://1234567890h.s3.amazonaws.com' if Rails.env.production?
-      zipfile_name = "#{dir}/public/uploads/tmp/allphoto.zip"
+      zipfile_name = "#{Rails.root}/public/uploads/tmp/allphoto.zip"
       File.delete(zipfile_name) if File.exist?(zipfile_name)
       Photo.all.each do |photo|
         arr = photo.photography.url.split('/')
