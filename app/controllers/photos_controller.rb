@@ -74,8 +74,9 @@ class PhotosController < ApplicationController
   def set_redis
     uri = URI.parse(ENV['REDIS_URL'] || 'redis://localhost:6379/')
     redis = Redis.new(url: uri)
-    {:redis_connection => redis}
+    { redis_connection: redis }
   end
+
   private
 
   def photo_params
