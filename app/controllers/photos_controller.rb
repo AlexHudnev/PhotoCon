@@ -9,7 +9,8 @@ class PhotosController < ApplicationController
 
   def rating
     @photo = Photo.by_approve
-    @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS)
+    redis_options = {redis_connection: $redis }
+    @steps_lb = Leaderboard.new('Steps', Leaderboard::DEFAULT_OPTIONS, redis_options)
     @photo.each do |photography|
       @steps_lb.rank_member(photography.id, photography.rating)
     end
