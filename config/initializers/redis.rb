@@ -1,5 +1,4 @@
 # frozen_string_literal: true
 
-uri = URI.parse('redis://localhost:6379/')
-uri = URI.parse(ENV['REDIS_URL']) if Rails.env.production?
+uri = ENV["REDISTOGO_URL"] || "redis://localhost:6379/"
 REDIS = Redis.new(url: uri)
