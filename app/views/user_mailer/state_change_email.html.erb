@@ -3,6 +3,6 @@
 <p>Hi <%= @user.first_name %>,</p>
 
 <p>
-Welcome from PhotoCon! Your photo status has been changed to: <%= @photo.aasm_state %>
+Welcome from PhotoCon! Your photo status has been changed to: <%= @state %>
 </p>
 <%= link_to "Сheck", photo_url(@photo) %>

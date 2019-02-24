@@ -58,14 +58,14 @@ ActiveAdmin.register Photo do
   member_action :approve do
     photo = Photo.find_by(id: params[:id])
     resource.approve!
-    UserMailer.state_change_email(photo).deliver_now
+    UserMailer.state_change_email(photo,'approve').deliver_now
     redirect_to admin_photos_path
   end
 
   member_action :ban do
     photo = Photo.find_by(id: params[:id])
     resource.ban!
-    UserMailer.state_change_email(photo).deliver_now
+    UserMailer.state_change_email(photo,'ban').deliver_now
     RemovePhotoWorker.perform_in(20.minutes, params[:id])
     redirect_to admin_photos_path
   end
