@@ -2,22 +2,22 @@
 <div class="searcpanel navbar">
 <div class="dropdown">
 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- Sort photo by:
+<%=I18n.t(:sorting)%>
 </button>
-<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<div class="dropdown-item"><%= link_to 'Date ▼', photos_path(sorting: 'created_at ASC', search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
-<div class="dropdown-item"><%= link_to 'Date ▲',photos_path(sorting: 'created_at DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
-<div class="dropdown-item"><%= link_to 'Rating ▼', photos_path(sorting: 'rating DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
-<div class="dropdown-item"><%= link_to 'Rating ▲', photos_path(sorting: 'rating ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
-<div class="dropdown-item"> <%= link_to 'Popularity ▼', photos_path(sorting: 'comment_count DESC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
-<div class="dropdown-item"><%= link_to 'Popularity ▲', photos_path(sorting: 'comment_count ASC',  search_by_users_name: params[:search_by_users_name] ? params[:search_by_users_name] : nil) %></div>
+<div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+<div class="dropdown-item " ><%= link_to I18n.t(:date) + '▼', photos_path(sorting: 'created_at ASC'),class:"btn ",remote:true %></div>
+<div class="dropdown-item" ><%= link_to I18n.t(:date) +'▲',photos_path(sorting: 'created_at DESC'),class:"btn ", remote:true %></div>
+<div class="dropdown-item" ><%= link_to I18n.t(:rating) +'▼', photos_path(sorting: 'rating DESC'),class:"btn ",  remote:true %></div>
+<div class="dropdown-item" ><%= link_to I18n.t(:rating) +'▲', photos_path(sorting: 'rating ASC'),class:"btn ", remote:true %></div>
+<div class="dropdown-item " > <%= link_to I18n.t(:popular) +'▼', photos_path(sorting: 'comment_count DESC'),class:"btn ", remote:true %></div>
+<div class="dropdown-item " ><%= link_to I18n.t(:popular) +'▲', photos_path(sorting: 'comment_count ASC'),class:"btn ", remote:true %></div>
 </div>
 </div>
+<scope class="asd"></scope>
 
-
-  <%= form_tag("search", method: "get",class:"form-inline my-2 my-lg-0") do %>
+  <%= form_tag("search", method: "get",class:"form-inline my-2 my-lg-0", remote:true) do %>
                 <%= text_field_tag(:q,"",class:"form-control mr-sm-2") %>
-              <%= submit_tag("Search",class:"btn btn-outline-secondary") %>
+              <%= submit_tag(I18n.t(:search),class:"btn btn-outline-secondary") %>
             <% end %>
 
 </div>

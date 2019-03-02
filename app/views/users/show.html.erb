@@ -9,10 +9,11 @@
 
                   <p></p>
 
-                  <p><%= link_to "Social net profile", @user.url,class: ' btn-primery' %></p>
+                  <p><%= link_to I18n.t(:social), @user.url,class: ' btn-primery' %></p>
 
 <hr>
-                <h6> User gallery</h6>
+<% if @photos.find_by(user_id: @user.id)%>
+                <h6> <%=I18n.t(:user_gallery)%></h6>
   <div id="carousel" class="carousel slide carousel-fade z-depth-1-half single_portfolio_text text-center" data-ride="carousel" style="margin-left:0px;">
 
 
@@ -25,7 +26,7 @@
         </div>
         <div class="carousel-caption">
 
-          <h3 class="h3-responsive">All user photos</h3>
+
 
         </div>
 
@@ -56,5 +57,5 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-
+<%end%>
   </div></div>

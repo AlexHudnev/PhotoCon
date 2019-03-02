@@ -1,4 +1,4 @@
-<h1>Post new Photo</h1>
+<h1><%=I18n.t(:new_photo)%></h1>
 <hr>
 
 
@@ -7,23 +7,25 @@
 <form class="form-horizontal" role="form">
   <div class="form-group">
     <div class="col-lg-8">
-      <%= f.label 'Title:' %> <br>
-      <%= f.text_field :name , class: 'form-control',placeholder:'Name',pattern:'[A-Za-zА-Яа-я0-9]{3,}' ,required: true%>
-      <label for="Title" class="text-left blockquote-footer ">Minimum 3 characters.</label>
+      <%= f.label I18n.t(:title) %> <br>
+      <%= f.text_field :name , class: 'form-control',placeholder:'Name',pattern:'[A-Za-zА-Яа-я0-9 ]{3,}' ,required: true%>
+      <label for="Title" class="text-left blockquote-footer "><%=I18n.t(:minimum_laters)%></label>
     </div>
     </div>
 
 <div class="collapse" id="upload">
-  <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Close list </span>
+  <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> <%=I18n.t(:close)%> </span>
 <div class="row">
 <% @collection.each do |item| %>
 
 <%if item['photo_807']%>
 <div class="col">
 <div class="card" style="width: 20rem;">
+<label class="btn btn-default">
   <a><img src="<%=item['photo_807']%>" class="card-img-top new " alt="..."> </a>
-   <%= f.radio_button :remote_photography_url, item['photo_807'] %>
 
+   <%= f.radio_button :remote_photography_url, item['photo_807']%>
+</label>
   </div>
 </div>
 <%end%>
@@ -40,14 +42,15 @@
 
             <br>
             <%= f.file_field :photography, accept: 'image/jpeg,image/gif,image/png' %>
-            <label for="file1" class="text-left blockquote-footer ">Please choose a file on your computer.</label>
+
           </span>
-Or upload from VK
-<span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Open list </span>
+          <%=I18n.t(:vk_upload)%>
+
+<span class=" btn-sm btn-link" data-toggle="collapse" data-target="#upload" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> <%=I18n.t(:open)%> </span>
         </div>
 
 
 
 <hr>
-  <%= f.submit "Upload", class: "btn btn-secondary " %>
+  <%= f.submit I18n.t(:upload), class: "btn btn-secondary " %>
 <% end %>

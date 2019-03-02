@@ -1,0 +1,16 @@
+<div class="text-center">
+  <% if current_user %>
+  <% like =  Like.find_by(user_id: current_user.id,photo_id: photo.id)%>
+  <%  unless like %>
+<%= form_for [photo,photo.likes.build] , remote: true do |f| %>
+<%= f.submit "♥",  class: '  btn btn-xl btn-outline-danger '%>
+<% end %>
+<%else%>
+<%= link_to '♥',
+        like_path(like.id),
+                    method: :delete,
+                    class: ' btn-xl btn-outline-primary  btn' , style: "", remote: true%>
+
+<% end %>
+<% end %>
+</div>

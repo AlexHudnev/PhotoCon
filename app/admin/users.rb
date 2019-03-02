@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
+  config.xls_builder.delete_columns :created_at, :updated_at, :moderator,
+                                    :access_token
+
+
   index do
     selectable_column
     column :first_name
@@ -25,7 +29,7 @@ ActiveAdmin.register User do
       row :email
       row :created_at
       row :updated_at
-      dropdown_menu 'Photos' do
+      dropdown_menu I18n.t('active_admin.photos.photography') do
         photos.each do |photo|
           item photo.name, admin_photo_path(photo)
         end

@@ -30,4 +30,36 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  rating: "Rating"
+  gallery: "Gallery"
+  sign_in: 'Sign in with VKontakte'
+  new_photo: "New Photo"
+  profile: 'My profile'
+  update_profile: 'Update profile'
+  logout: 'Logout'
+  responds: 'Responds'
+  respond: 'Respond'
+  reply: 'Reply to comment'
+  add: "Add comment"
+  no_sign: 'you need sign in'
+  no_comments: 'No comments here...'
+  delete_confirmation: "Are you shure ?"
+  title: "Title"
+  minimum_laters: "Minimum 3 characters."
+  vk_upload: "Or upload from VK"
+  open: "Open list"
+  close: "Close list"
+  upload: "Upload"
+  cancel: "Cancel"
+  save: "Save"
+  user_gallery: "User gallery"
+  social: "Social net profile"
+  rank: "Rank"
+  author: "Author"
+  photo: "Photo"
+  click: "Click here to open fullsize"
+  sorting: "Sort by"
+  date: "Date"
+  popular: "Popular"
+  search: "Search"
+  send_to_moder: "Photo send to moderation"

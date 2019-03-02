@@ -4,7 +4,8 @@
 class PhotosController < ApplicationController
   def index
     @photos = Photo.page(params[:page]).by_approve unless params[:sorting]
-    @photos = Photo.page(params[:page]).reorder(params[:sorting])
+    @photos = Photo.page(params[:page]).reorder(params[:sorting]).by_approve
+    @sorting = params[:sorting]
   end
 
   def rating
@@ -36,7 +37,7 @@ class PhotosController < ApplicationController
     outcome = Photos::Create.run(photo_params)
     if outcome.valid?
       @photo = outcome.result
-      flash[:success] = 'Photo send to moderation '
+      flash[:success] = I18n.t(:send_to_moder)
       redirect_to root_path
     else
       @photo = outcome
@@ -50,7 +51,7 @@ class PhotosController < ApplicationController
 
   def download_zip
     date = Time.now.strftime('%d_%m_%Y_%H_%M')
-    zip_file = PhotosHelper::ZipPhotos.new
+    zip_file = ZipHelper::ZipPhotos.new
     file = zip_file.make_zip
     send_file file, type: 'application/zip', x_sendfile: true,
                     disposition: 'attachment', filename: "#{date}.zip"
@@ -87,7 +88,7 @@ class PhotosController < ApplicationController
   end
 
   def api_params
-    { count: 100, ovner_id: current_user.uid,
+    { count: 15, ovner_id: current_user.uid,
       access_token: current_user.access_token,
       v: '5.9', page: 1 }
   end

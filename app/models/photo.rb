@@ -8,7 +8,7 @@ class Photo < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   scope :by_approve, -> { where(aasm_state: :approved) }
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(rating: :desc) }
   scope :by_rating, -> { reorder(rating: :desc) }
   mount_uploader :photography, ImageUploader
   validates :user_id, presence: true
@@ -17,12 +17,13 @@ class Photo < ApplicationRecord
 
   def share(url)
     ref = 'http://vk.com/share.php?url=' + url
-    ref + '&title=' + name + '&noparse=false'
+    ref + '&image=' + photography.url + '&title=' + name + '&noparse=false'
   end
   aasm do
     state :moderated, initial: true
     state :approved
     state :banned
+    state :deleted
     event :approve do
       transitions from: :moderated, to: :approved
       transitions from: :banned, to: :approved
@@ -31,6 +32,15 @@ class Photo < ApplicationRecord
     event :ban do
       transitions from: :moderated, to: :banned
       transitions from: :approved, to: :banned
+    end
+
+    event :delete do
+      transitions from: :moderated, to: :deleted
+      transitions from: :approved, to: :deleted
+      transitions from: :banned, to: :deleted
+    end
+    event :restore do
+      transitions from: :deleted, to: :moderated
     end
   end
 end

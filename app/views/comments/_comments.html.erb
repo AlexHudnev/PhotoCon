@@ -20,8 +20,8 @@
                   <p class="komen text-body ">
                         <%=simple_format(commen.body) %>
 </p>
-                        <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> Responds </span>
-                       <% if current_user %><span class=" btn-sm btn-link "> <%= link_to 'Respond ', new_user_photo_comment_comment_path(parent_comment_id: commen, user_id: current_user, photo_id: commen.photo_id) %></span><% end %>
+                        <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> <%= I18n.t(:responds)%> </span>
+                       <% if current_user %><span class=" btn-sm btn-link "> <%= link_to I18n.t(:respond), new_user_photo_comment_comment_path(parent_comment_id: commen, user_id: current_user, photo_id: commen.photo_id) %></span><% end %>
 <small><span class="text-right"><i class=" icon ion-md-time"></i> <%=commen.created_at.strftime("%H:%M %B %d, %Y")%></span></small>
                <hr>
 

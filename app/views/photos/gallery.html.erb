@@ -8,72 +8,14 @@
 <br>
 
 
-         <% @photos.each do |photo| %>
-
-         <div clss="col offset-md-4 "
-            <% if photo.aasm_state == 'approved' %>
-
-            <% user = User.find(photo.user_id) %>
-
-             <div class="  single_portfolio_text shadow">
-                <%= image_tag photo.photography.gallery.url %>
-
-                 <div class="portfolio_images_overlay " >
-                   <a href=<%=photo_path(photo)%>><h6 class="clrd-font text-center">
-                     <%= photo.name %></h6></a>
-                   <div class="col-lg  text-danger">Author: <%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></div>
 
 
+     <scope class = "gal" id='gal'><%= render '/photos/gal' %></scope>
 
 
-                    <div class="col  text-primary"><span class="text-danger" >Likes: </span><span class="1votes-count-<%=photo.id%> " ><%= photo.rating %></span> </div>
+<br>
+       <div id='paginator' >
 
-                      <div class="col col-sm  "  >
-                        <div class="text-center">
-                          <% if current_user %>
-                        <%= form_for [photo,photo.likes.build] , remote: true do |f| %>
-                        <%= f.submit "♥",  class: '  btn btn-xl btn-outline-danger '%>
-                        <% end %>
-                        <% end %>
-
-                      </div>
-                      <br>
-                      <div class="text-center" data-toggle="modal" data-target="#myModal<%=photo.id%>">
-                        <span class="text-muted ">Click here to open fullsize</span>
-                        </div>
-                     </div>
-
-             </div>
-
-</div>
-       </div>
-
-
-
-       <div class="modal fade" id="myModal<%=photo.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-           <div class="modal-dialog modal-lg">
-             <div class="modal-content">
-               <div class="modal-header">
-                 <h6 class="text-white">
-                   <%= photo.name %></h6>
-                 <button type="button" class="close btn" data-dismiss="modal"><span aria-hidden="true" class="text-danger">×</span></button>
-               </div>
-               <div class="modal-body ">
-
-                 <%= image_tag photo.photography.url%>
-
-               </div>
-             </div>
-           </div>
-         </div>
-
-
-       <% end %>
-       </div>
-       <% end %>
-
-       <div>
-       <br>
        <%= paginate @photos , :theme => 'twitter-bootstrap-4',
-                          :pagination_class => " pagination pagination-sm  text-white justify-content-center "%>
+                          :pagination_class => " pagination pagination  text-white justify-content-center ",remote: true%>
        </div>

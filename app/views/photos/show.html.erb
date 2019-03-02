@@ -11,9 +11,16 @@
     <div class="cardbox shadow-lg bg-white">
 
      <div class="cardbox-heading">
-			 <h4 class="text-center">
-		 		<%= @photo.name %>
-		 	</h4>
+<% if current_user %>
+        <%  if @photo.user_id == current_user.id %>
+        <p class="text-right"><%= link_to I18n.t(:delete),
+                photo_path(@photo.id),
+                            method: :delete,
+                            data: { confirm: I18n.t(:delete_confirmation) },class: 'btn' %>
+        <% end %>  <% end %></p>
+        <h4 class="text-center">
+         <%= @photo.name %></h4>
+
 
 
       <div class="media m-0">
@@ -24,7 +31,7 @@
        <div class="media-body">
         <p class="m-0"> <%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></p>
 
-      <small><span><i class="icon ion-md-time"></i> <%= @photo.updated_at%></span></small>
+      <small><span><i class="icon ion-md-time"></i> <%= @photo.updated_at.strftime("%H:%M %B %d, %Y")%></span></small>
        </div>
       </div><!--/ media -->
      </div><!--/ cardbox-heading -->
@@ -38,17 +45,17 @@
 <div>
   <div id="commentform" class="commentform-<%=@photo.id%>">
   <% if @photo.comments.any? %>
-  <p align='center'>Last comment:</p>
+
   <% @comments = @photo.comments.order(updated_at: :desc, id: :asc).where(parent_comment_id: nil) %>
   <% @printed_comment = [] %>
 
   <%= render '/comments/comments', comments: @comments , photo: @photo %>
    </div>
-   
+
 
         <% else %>
 
-          <p align='center'>No comments here...</p>
+          <p align='center'><%=I18n.t(:no_comments)%></p>
         <% end %>
         </div>
 
@@ -61,11 +68,11 @@
        <a href=""><%= image_tag current_user.image_url, alt:  current_user.first_name, class:"rounded-circle" %></a>
       </span>
       <div class=" container search">
-       <%= f.text_area :body, class: 'commentinp' ,placeholder:"Write a comment",size: "35x2" ,required: true%>
-       <%= f.submit 'Post', class: '  btn-sm btn-primary text-right' %>
+       <%= f.text_area :body, class: 'commentinp' ,placeholder:I18n.t(:add),size: "35x2" ,required: true%>
+       <%= f.submit '  ', class: '  btn-sm btn-primary text-right' %>
        <% end %>
      <% else %>
-         <p>you need sign in</p>
+         <p><%=I18n.t(:no_sign)%></p>
      <% end %>
 </div>
 </div>

@@ -2,99 +2,24 @@
   <br>
 <%= render 'sorting'%>
 </div>
-<div>
 <br>
+<div id='paginator1' >
+
 <%= paginate @photos , :theme => 'twitter-bootstrap-4',
-                   :pagination_class => " pagination justify-content-end "%>
-</div></div>
-
-<% @photos.each do |photo| %>
-   <% if photo.aasm_state == 'approved' %>
-
-<% user = User.find(photo.user_id) %>
-<section class="hero">
-       <div class="container">
-        <div class="row">
-
-     <div class="col-lg-6 offset-lg-3">
-
-    <div class="cardbox shadow-lg bg-white">
-
-     <div class="cardbox-heading">
-
-      <div class="media m-0">
-       <div class="d-flex mr-3">
-      <a href=""><%= image_tag user.image_url, alt:  user.first_name, class:"img-fluid rounded-circle" %>
-        </a>
-       </div>
-       <div class="media-body">
-        <p class="m-0"> <%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></p>
-      <small><span><i class="icon ion-md-pin"></i> <%= photo.name%></span></small>
-      <small><span><i class="icon ion-md-time"></i> <%= photo.updated_at.strftime("%H:%M %B %d, %Y")%></span></small>
-       </div>
-      </div><!--/ media -->
-     </div><!--/ cardbox-heading -->
-
-     <div class="text-center  ">
-        <a  href=<%=photo_path(photo)%>> <%= image_tag photo.photography.show.url %></a>
-
-     </div><!--/ cardbox-item -->
-     <div class="cardbox-base text-muted votes-count-<%=photo.id%>">
-
-<%= render '/likes/likes',  photo: photo %>
-     <!--/ cardbox-base -->
-
-<div>
-  <div id="commentform" class="commentform-<%=photo.id%>">
-  <% if photo.comments.any? %>
-  <p align='center'>Last comment:</p>
-  <% @comments = photo.comments.order(updated_at: :desc, id: :asc).where(parent_comment_id: nil).limit(1) %>
-  <% @printed_comment = [] %>
-
-  <%= render '/comments/comments', comments: @comments , photo: photo %>
-   </div>
-
-
-
-        <% else %>
-
-          <p align='center'>No comments here...</p>
-        <% end %>
-        </div>
-
-
-<% if current_user %>
-
-       <%= form_for [photo, photo.comments.build], remote: true do |f| %>
-
-     <div class="cardbox-comments">
-      <span class=" comment-avatar float-left">
-       <a href=""><%= image_tag current_user.image_url, alt:  current_user.first_name, class:"rounded-circle" %></a>
-      </span>
-      <div class=" container search">
-       <%= f.text_area :body, class: 'commentinp' ,placeholder:"Write a comment",size: "35x2",required: true%>
-       <%= f.submit 'Post', class: '  btn-sm btn-primary text-right' %>
-       <% end %>
-     <% else %>
-         <p>you need sign in</p>
-     <% end %>
+                   :pagination_class => " pagination justify-content-end ", remote:true%>
 </div>
+
+
+
+
+
+<div class = "photos row" id='photos'>
+
+     <%= render @photos %>
+
 </div>
+<div id='paginator' >
+
+<%= paginate @photos , :theme => 'twitter-bootstrap-4',
+                   :pagination_class => " pagination justify-content-end ", remote:true%>
 </div>
-      </div><!--/. Search -->
-     </div><!--/ cardbox-like -->
-
-    </div><!--/ cardbox -->
-
-         </div><!--/ col-lg-6 -->
-
-
-         <% end %>
-         <% end %>
-
-
-         <div>
-
-         <%= paginate @photos , :theme => 'twitter-bootstrap-4',
-                            :pagination_class => " pagination justify-content-end "%>
-         </div>

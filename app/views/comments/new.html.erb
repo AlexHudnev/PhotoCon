@@ -33,7 +33,7 @@
          <%= image_tag current_user.image_url, alt:  current_user.first_name %></td>
 
               <td >
-                <%= f.label 'Reply to comment' %><br>
+                <%= f.label  I18n.t(:reply) %><br>
                 <%= f.text_area :body ,required: true%>
 
 

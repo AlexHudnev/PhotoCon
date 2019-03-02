@@ -6,7 +6,7 @@ class RemovePhotoWorker
 
   def perform(photo_id)
     photo = Photo.find(photo_id)
-    return unless photo.banned?
+    return unless photo.banned? || photo.deleted?
 
     photo.remove_photography!
     photo.destroy

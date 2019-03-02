@@ -1,0 +1,2 @@
+$("#rating").html("<%= j render('/leaderboards/leaderboards') %>");
+$("#paginator").html("<%= j paginate(@steps_results,theme:  'twitter-bootstrap-4',pagination_class: 'pagination justify-content-end', remote: true) %>");

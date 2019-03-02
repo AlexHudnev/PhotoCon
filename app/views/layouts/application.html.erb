@@ -21,8 +21,8 @@
   	    <div class="navbar-header ">
   	    <%= link_to 'PhotoCon', root_path, class: 'navbar-brand btn  text-white' %>
   	    </div>
-<div><%= link_to 'Rating', rating_path , class: '    btn btn-secondary' %></div>
-<div><%= link_to 'Gallery', gallery_path , class: '  btn btn-secondary' %></div>
+<div><%= link_to I18n.t(:rating), rating_path , class: '    btn btn-secondary' %></div>
+<div><%= link_to I18n.t(:gallery), gallery_path , class: '  btn btn-secondary' %></div>
         <div id="navbar">
 
           <% if current_user %>
@@ -35,13 +35,18 @@
           <%= image_tag current_user.image_url, alt: current_user.first_name %>
         </div>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'New Photo',new_photo_path,class: 'dropdown-item' %>
-            <%= link_to 'My profile', user_path(current_user.id) ,class: 'dropdown-item'  %>
-              <%= link_to 'Update profile', edit_user_path(current_user.id) ,class: 'dropdown-item'  %>
- 	          <%= link_to '   Out   ', logout_path,class: 'dropdown-item', method: :delete %>
+            <%= link_to I18n.t(:new_photo),new_photo_path,class: 'dropdown-item' %>
+            <%= link_to I18n.t(:profile), user_path(current_user.id) ,class: 'dropdown-item'  %>
+              <%= link_to I18n.t(:update_profile), edit_user_path(current_user.id) ,class: 'dropdown-item'  %>
+ 	          <%= link_to I18n.t(:logout), logout_path,class: 'dropdown-item', method: :delete %>
             </div>
  	        </ul>
- 	       <% end %>
+         <%else%>
+         <div>  <%= link_to I18n.t(:sign_in), '/auth/vkontakte',class: 'btn btn-lg btn-outline-light' %></div>
+
+         <% end %>
+
+
   	    </div>
   	  </div>
   	</nav>

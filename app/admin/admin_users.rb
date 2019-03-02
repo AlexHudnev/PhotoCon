@@ -3,13 +3,13 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
 
+  actions :all, except: [:destroy]
   index do
     selectable_column
     id_column
     column :email
-    column :current_sign_in_at
-    column :sign_in_count
-    column :created_at
+    column I18n.t('active_admin.current_sign_in'), :current_sign_in_at
+    column I18n.t('active_admin.comments.created_at'), :created_at
     actions
   end
 
@@ -26,4 +26,5 @@ ActiveAdmin.register AdminUser do
     end
     f.actions
   end
+
 end

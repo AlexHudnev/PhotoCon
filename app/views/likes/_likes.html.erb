@@ -5,27 +5,23 @@
   <%  unless like %>
       <%= form_for [@photo,@photo.likes.build] , remote: true do |f| %>
 
-      <div class="col"><span class=""><%= @photo.rating %></span><span> Likes</span>
-        <%= f.submit "♥",  class: ' btn-link btn text-danger like'%>
+      <div class="col "><span class="1votes-count-<%=@photo.id%>" remote = true><%= @photo.rating %></span>
+        <%= f.submit "♥",  class: ' btn-link btn text-danger like', style: "text-decoration: none",remote: true%>
       <% end %>
 <%else%>
-<div class="col"><span class=""><%= @photo.rating %></span><span> Likes</span>
+<div class="col"><span class="1votes-count-<%=@photo.id%>" remote = true><%= @photo.rating %></span>
 <%= link_to '♥',
         like_path(like.id),
                     method: :delete,
-                    class: 'text-black btn-link btn' %>
+                    class: 'text-black btn-link btn' , style: "text-decoration: none", remote: true%>
 <% end %>
 
-<%  if @photo.user_id == current_user.id %>
-<%= link_to 'Delete',
-        photo_path(@photo.id),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-<% end %>
-<%= link_to 'Share', @photo.share(request.original_url) , target: :_blank %>
+
+
+<%= link_to 'VK', @photo.share(request.original_url) , target: :_blank,class: 'btn' %>
 </div>
 <%else%>
-<span class=""><%= @photo.rating %></span><span> Likes</span>
+<span class=""><%= @photo.rating %> ♥</span>
       <% end %>
 
 

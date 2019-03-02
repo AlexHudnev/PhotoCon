@@ -1,0 +1,2 @@
+$("#gal").html("<%= j render('/photos/gal') %>");
+$("#paginator").html("<%= j paginate(@photos,theme:  'twitter-bootstrap-4',pagination_class: 'pagination justify-content-center', remote: true) %>");

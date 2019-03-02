@@ -1,0 +1,3 @@
+$("#photos").html("<%= j render(@photos) %>");
+$("#paginator").html("<%= j paginate(@photos,theme:  'twitter-bootstrap-4',pagination_class: 'pagination justify-content-end', remote: true) %>");
+$("#paginator1").html("<%= j paginate(@photos,theme:  'twitter-bootstrap-4',pagination_class: 'pagination justify-content-end', remote: true) %>");
