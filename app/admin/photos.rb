@@ -87,6 +87,7 @@ ActiveAdmin.register Photo do
         image_tag ad.photography.show.url
       end
       row :name
+      row :description
       row :author, :user_id do
         link_to('Author', admin_user_path(photo.user_id))
       end

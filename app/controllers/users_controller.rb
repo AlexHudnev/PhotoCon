@@ -21,6 +21,15 @@ class UsersController < ApplicationController
     @photos = Photo.by_approve
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    return unless @user.id == current_user.id
+
+    @user.destroy
+    flash[:success] = 'Account removed '
+    redirect_to root_path
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email)
   end

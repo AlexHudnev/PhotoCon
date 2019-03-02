@@ -11,15 +11,15 @@
     <div class="cardbox shadow-lg bg-white">
 
      <div class="cardbox-heading">
-<% if current_user %>
-        <%  if @photo.user_id == current_user.id %>
-        <p class="text-right"><%= link_to I18n.t(:delete),
-                photo_path(@photo.id),
-                            method: :delete,
-                            data: { confirm: I18n.t(:delete_confirmation) },class: 'btn' %>
-        <% end %>  <% end %></p>
+
         <h4 class="text-center">
-         <%= @photo.name %></h4>
+         <%= @photo.name %> <% if current_user %>
+                 <%  if @photo.user_id == current_user.id %>
+                 <span ><%= link_to "X",
+                         photo_path(@photo.id),
+                                     method: :delete,
+                                     data: { confirm: I18n.t(:delete_confirmation) },class: 'btn btn-outline-danger' %></span>
+                 <% end %>  <% end %></h4>
 
 
 
@@ -40,6 +40,16 @@
         <a data-toggle="modal" data-target="#myModal<%=@photo.id%>"><%= image_tag @photo.photography.show.url %></a>
 
      </div><!--/ cardbox-item -->
+<% unless @photo.description == "" %>
+<br>
+  <div  class=" row ">
+  <div  class=" col-md-auto "><%= I18n.t(:description)%>:</div>
+      <div  class=" col">
+
+<em style="word-wrap: break-word"><%= @photo.description %></em>
+
+        </div> </div>
+<%end%>
      <div class="cardbox-base text-muted votes-count-<%=@photo.id%>"  >
   <%= render '/likes/likes',  photo: @photo %>
 <div>

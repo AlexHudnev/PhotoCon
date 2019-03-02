@@ -3,7 +3,11 @@
                 <div class="card">
                 <%= image_tag @user.image_url, alt:  @user.first_name , style:"width:100%"%>
                   <br>
-                  <h3><b><%= @user.first_name%> <%=@user.last_name %></b></h3>
+                  <h3><b><%= @user.first_name%> <%=@user.last_name %><% if current_user %> <%  if @user.id == current_user.id %>
+                  <span ><%= link_to "X",
+                          user_path(@user.id),
+                                      method: :delete,
+                                      data: { confirm: I18n.t(:delete_confirmation) },class: 'btn btn-outline-danger' %></span>  <% end %>  <% end %></b></h3>
                   <hr>
                   <p class="title">email: <%= @user.email %></p>
 

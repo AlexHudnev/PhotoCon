@@ -5,6 +5,11 @@ ActiveAdmin.register User do
                                     :access_token
 
 
+  controller do
+    def destroy
+      resource.destroy unless Photo.where(user_id: params[:id]).size.positive?
+    end
+  end
   index do
     selectable_column
     column :first_name

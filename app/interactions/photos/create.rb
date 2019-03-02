@@ -3,6 +3,7 @@
 module Photos
   class Create < ActiveInteraction::Base
     string :name
+    string :description, default: nil
     file :photography, default: nil
     object :user
     string :remote_photography_url, default: nil
@@ -15,6 +16,7 @@ module Photos
 
     def execute
       photo = user.photos.create!(name: name,photography: photography,
+                                  description: description,
                                   remote_photography_url: remote_photography_url)
       errors.merge!(photo.errors) unless photo.save
     end

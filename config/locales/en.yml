@@ -63,3 +63,11 @@ en:
   popular: "Popular"
   search: "Search"
   send_to_moder: "Photo send to moderation"
+  active_admin:
+    status_tag:
+      "yes": "Yes"
+      "no": "No"
+      "approved": "Approved"
+      deleted: "Deleting"
+      moderated: "Moderated"
+      banned: "Banned"

@@ -6,6 +6,7 @@ ru:
         next: "Далее"
         last: "Конец"
         truncate: "..."
+  description: "Описание"
   all: "Все"
   send_to_moder: "Фото отправлено на модерацию"
   search: "Искать"
@@ -50,6 +51,7 @@ ru:
     attributes:
       photo:
         name: "Название"
+        description: "Описание"
         photography: "Фото"
         photo: "Фото"
         author: "Автор"

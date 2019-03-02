@@ -61,13 +61,15 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     return unless @photo.user_id == current_user.id
 
-    @photo.destroy
+    @photo.delete!
+    RemovePhotoWorker.perform_in(5.minutes, params[:id])
     flash[:success] = 'Photo removed '
     redirect_to root_path
   end
 
   def search
     ids = Photo.where('lower(name) LIKE ?', "%#{params[:q].mb_chars.downcase}%")
+    ids += Photo.where('lower(description) LIKE ?', "%#{params[:q].mb_chars.downcase}%")
     @photos = Photo.where(id: ids, aasm_state: :approved).page(params[:page])
     flash.now[:warning] = "we can't find it '#{params[:q]}'" unless @photos.any?
   end
@@ -82,6 +84,7 @@ class PhotosController < ApplicationController
 
   def photo_params
     { name: params.fetch(:photo)[:name],
+      description: params.fetch(:photo)[:description],
       photography: params.fetch(:photo)[:photography],
       remote_photography_url: params.fetch(:photo)[:remote_photography_url],
       user: current_user }

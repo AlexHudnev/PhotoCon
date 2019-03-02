@@ -11,6 +11,11 @@
       <%= f.text_field :name , class: 'form-control',placeholder:'Name',pattern:'[A-Za-zА-Яа-я0-9 ]{3,}' ,required: true%>
       <label for="Title" class="text-left blockquote-footer "><%=I18n.t(:minimum_laters)%></label>
     </div>
+
+    <div class="col-lg-8">
+      <%= f.label I18n.t(:description) %> <br>
+      <%= f.text_field :description , class: 'form-control',placeholder:'...',required: true%>      
+    </div>
     </div>
 
 <div class="collapse" id="upload">
