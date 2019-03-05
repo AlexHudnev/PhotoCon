@@ -30,6 +30,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  ban_massage: "You have a temporary ban, access to basic functions is limited."
+  all: "All"
   rating: "Rating"
   gallery: "Gallery"
   sign_in: 'Sign in with VKontakte'

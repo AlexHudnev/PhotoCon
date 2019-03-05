@@ -22,6 +22,10 @@ class SessionControllerController < ApplicationController
     redirect_to root_path
   end
 
+  def ban(user_id)
+    session.delete(user_id)
+  end
+
   def auth_failure
     redirect_to root_path
   end

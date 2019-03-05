@@ -1,13 +1,18 @@
 
+<div>Коментарии<%= paginate comments ,
+                   :pagination_class => " pagination justify-content-center "%>
+                   </div>
 <% comments.each do |commen| %>
  <% user = User.find(commen.user_id.to_i) %>
 
 <div id="active_admin_comment_1" class="active_admin_comment">
                   <div class="active_admin_comment_meta">
-                    <h4 class="active_admin_comment_author"><%= link_to "#{user.first_name} #{user.last_name}", admin_user_path(user.id)%></h4>
-                    <span><%=commen.created_at.strftime("%H:%M %B %d, %Y")%></span>
+                    <h4 class="active_admin_comment_author"><%= link_to "#{user.first_name} #{user.last_name}", admin_user_path(user.id)%>
+                    <span><%=commen.created_at.strftime("%H:%M %B %d, %Y")%></span></h4>
                </div>
                   <div class="active_admin_comment_body"><p><%=simple_format(commen.body) %></p></div>
                 </div>
 
+
+<hr>
 <%end%>

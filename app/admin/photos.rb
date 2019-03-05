@@ -45,7 +45,6 @@ ActiveAdmin.register Photo do
     redirect_to admin_photos_path
   end
 
-
   index  do
     selectable_column
     column :name
@@ -97,8 +96,9 @@ ActiveAdmin.register Photo do
       row :id
       row :aasm_state
     end
+    coms = Kaminari.paginate_array(photo.comments).page(params[:page]).per(6)
+    render '/admin/comments', comments: coms
   end
-
 
   member_action :approve do
     photo = Photo.find_by(id: params[:id])

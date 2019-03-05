@@ -20,15 +20,16 @@
                   <p class="komen text-body ">
                         <%=simple_format(commen.body) %>
 </p>
-                        <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> <%= I18n.t(:responds)%> </span>
-                       <% if current_user %><span class=" btn-sm btn-link "> <%= link_to I18n.t(:respond), new_user_photo_comment_comment_path(parent_comment_id: commen, user_id: current_user, photo_id: commen.photo_id) %></span><% end %>
+                        <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> <%= I18n.t(:responds)%> <%if commen.sub_comments.size.positive? %>(*)<%end%> </span>
+                       <% if current_user %><%unless current_user.ban%><span class=" btn-sm btn-link "> <%= link_to I18n.t(:respond), new_user_photo_comment_comment_path(parent_comment_id: commen, user_id: current_user, photo_id: commen.photo_id) %></span><% end %><% end %>
 <small><span class="text-right"><i class=" icon ion-md-time"></i> <%=commen.created_at.strftime("%H:%M %B %d, %Y")%></span></small>
                <hr>
 
                 </div>
             </div>
+
   <div class="collapse" id="navbarComment<%=commen.id%>">
-            <div class="geser">
+                <div class="geser">
  <%= render '/comments/comments', comments: commen.sub_comments if commen.sub_comments %>
             </div>
 </div>

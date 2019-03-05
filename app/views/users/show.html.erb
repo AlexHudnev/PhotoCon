@@ -46,7 +46,11 @@
 
           <div class="mask rgba-black-light"></div>
         </div>
-
+<div class="portfolio_images_overlay2 " >
+<div class="col  text-primary"><span class="text-danger" ><%= I18n.t(:rating)%>: </span><span class="1votes-count-<%=photo.id%> " ><%= photo.rating %></span> </div>
+<span class="galvotes-count-<%=photo.id%>">
+             <%= render '/likes/gal_likes',  photo: photo %></span>
+ </div>
       </div>
 
     <%end%>
