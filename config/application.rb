@@ -19,6 +19,7 @@ module PhotoCon
     config.active_job.queue_adapter = :sidekiq
     config.load_defaults 5.2
     config.api_only = false
+    config.i18n.default_locale = :ru
     ENV['VKONTAKTE_KEY'] = Rails.application.credentials.dig(:vkontakte_key)
     ENV['VKONTAKTE_SECRET'] = Rails.application.credentials.dig(:vkontakte_secret)
     # Settings in config/environments/* take precedence over those specified here.

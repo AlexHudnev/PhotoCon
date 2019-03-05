@@ -65,6 +65,9 @@ en:
   popular: "Popular"
   search: "Search"
   send_to_moder: "Photo send to moderation"
+  approve: "Approve"
+  ban: "Ban"
+  restore: "Restore"
   active_admin:
     status_tag:
       "yes": "Yes"

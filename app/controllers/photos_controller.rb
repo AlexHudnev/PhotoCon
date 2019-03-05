@@ -4,8 +4,7 @@
 class PhotosController < ApplicationController
   def index
     @photos = Photo.page(params[:page]).by_approve.reorder(params[:sorting])
-    @photos = Photo.page(params[:page]).by_rating unless params[:sorting].present?
-    @sorting = params[:sorting]
+    @photos = Photo.page(params[:page]).by_approve.by_rating unless params[:sorting].present?
   end
 
   def rating
