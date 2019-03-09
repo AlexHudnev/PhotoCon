@@ -1,4 +1,10 @@
 ru:
+  comment_count ASC: "Популярность ▲"
+  comment_count DESC: "Популярность ▼"
+  created_at ASC: "Дата ▲"
+  created_at DESC: "Дата ▼"
+  rating ASC: "Рейтинг ▲"
+  rating DESC: "Рейтинг ▼"
   views:
       pagination:
         first: "Начало"

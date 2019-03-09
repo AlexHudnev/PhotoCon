@@ -1,8 +1,8 @@
 
 <div class="searcpanel navbar">
 <div class="dropdown">
-<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<%=I18n.t(:sorting)%>
+<button class="btn btn-secondary btn-sm dropdown-toggle navbtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<span class="sort"><%= I18n.t('rating DESC')%></span>
 </button>
 <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
 <div class="dropdown-item " ><%= link_to I18n.t(:date) + '▼', photos_path(sorting: 'created_at ASC'),class:"btn ",remote:true %></div>

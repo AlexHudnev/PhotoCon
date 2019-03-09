@@ -30,6 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  comment_count ASC: "Popular ▲"
+  comment_count DESC: "Popular ▼"
+  created_at ASC: "Date ▲"
+  created_at DESC: "Date ▼"
+  rating ASC: "Rating ▲"
+  rating DESC: "Rating ▼"
+
   ban_massage: "You have a temporary ban, access to basic functions is limited."
   all: "All"
   rating: "Rating"
