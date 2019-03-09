@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_130839) do
+ActiveRecord::Schema.define(version: 2019_03_06_182226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_03_04_130839) do
     t.string "aasm_state"
     t.integer "comment_count", default: 0, null: false
     t.string "description", default: ""
+    t.integer "share", default: 0, null: false
     t.index ["user_id", "created_at"], name: "index_photos_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_photos_on_user_id"
   end

@@ -48,6 +48,7 @@ ActiveAdmin.register Photo do
   index  do
     selectable_column
     column :name
+    column :share
     column :photo do |pg|
       image_tag pg.photography.admin.url
     end
@@ -98,6 +99,15 @@ ActiveAdmin.register Photo do
     end
     coms = Kaminari.paginate_array(photo.comments).page(params[:page]).per(6)
     render '/admin/comments', comments: coms
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :description
+      f.input :aasm_state
+    end
+    f.actions
   end
 
   member_action :approve do

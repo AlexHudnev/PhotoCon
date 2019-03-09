@@ -18,7 +18,8 @@
 
 
 
-<%= link_to 'VK', @photo.share(request.original_url) , target: :_blank,class: 'btn' %>
+<%= link_to 'VK', share_path(id: @photo.id, url: request.original_url) , target: :_blank,class: 'btn'%>
+
 </div>
 <%else%>
 <span class=""><%= @photo.rating %> ♥</span>

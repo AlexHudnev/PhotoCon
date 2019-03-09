@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   post 'photos', to: 'photos#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/auth/:provider/callback', to: 'session_controller#create'
-  get 'download_zip', to: "photos#download_zip"
+  get 'download_zip', to: 'photos#download_zip'
   delete '/logout', to: 'session_controller#destroy'
   get 'search', to: 'photos#search'
   match '/rating', to: 'photos#rating', via: 'get'
@@ -32,6 +32,7 @@ Rails.application.routes.draw do
        to: 'comments#create', as: 'user_photo_comment_comments'
   get '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/new',
       to: 'comments#new', as: 'new_user_photo_comment_comment'
+  get '/share/', to: 'photos#share'
   resources :users
   resources :likes
   resources :photos do

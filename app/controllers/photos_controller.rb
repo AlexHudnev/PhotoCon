@@ -48,6 +48,12 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
 
+  def share
+    @photo = Photo.find(params[:id])
+    sharing = PhotosHelper::Sharing.new
+    redirect_to sharing.share(@photo, params[:url])
+  end
+
   def download_zip
     date = Time.now.strftime('%d_%m_%Y_%H_%M')
     zip_file = ZipHelper::ZipPhotos.new
