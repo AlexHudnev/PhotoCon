@@ -34,6 +34,7 @@ class Photo < ApplicationRecord
       transitions from: :moderated, to: :deleted
       transitions from: :approved, to: :deleted
       transitions from: :banned, to: :deleted
+      transitions from: :deleted, to: :deleted
     end
     event :restore do
       transitions from: :deleted, to: :moderated

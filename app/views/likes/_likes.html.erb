@@ -1,6 +1,7 @@
 <%@photo = photo%>
 <div class="cardbox-base text-muted" id="likes" >
   <% if current_user %>
+  <% unless current_user.ban %>
   <% like =  Like.find_by(user_id: current_user.id,photo_id: @photo.id)%>
   <%  unless like %>
       <%= form_for [@photo,@photo.likes.build] , remote: true do |f| %>
@@ -18,9 +19,13 @@
 
 
 
-<%= link_to 'VK', share_path(id: @photo.id, url: request.original_url) , target: :_blank,class: 'btn'%>
+
+<%= link_to ' ', share_path(id: @photo.id, url: request.original_url) ,title:"#{I18n.t(:sharing)}", target: :_blank,class: 'btn vk'%>
 
 </div>
+<%else%>
+<br>
+<% end %>
 <%else%>
 <span class=""><%= @photo.rating %> ♥</span>
       <% end %>

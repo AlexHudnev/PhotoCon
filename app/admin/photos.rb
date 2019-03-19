@@ -4,9 +4,10 @@ require 'sidekiq/api'
 require 'rubygems'
 require 'zip'
 ActiveAdmin.register Photo do
+  config.clear_action_items!
   config.xls_builder.delete_columns :created_at, :updated_at, :photography
   config.per_page = [5, 10, 50, 100]
-
+  permit_params :name, :disposition
   scope I18n.t(:all), :all
   scope I18n.t('active_admin.status_tag.approved'), :approved, group: :status
   scope I18n.t('active_admin.status_tag.banned'), :banned, group: :status
@@ -57,22 +58,22 @@ ActiveAdmin.register Photo do
       columns do
         if pg.aasm_state == 'moderated'
           column do
-            link_to I18n.t(:approve), approve_admin_photo_path(pg)
+            link_to I18n.t(:approve), approve_admin_photo_path(pg), class: 'button2'
           end
           column do
-            link_to I18n.t(:ban), ban_admin_photo_path(pg)
+            link_to I18n.t(:ban), ban_admin_photo_path(pg), class: 'button1'
           end
         elsif pg.aasm_state == 'approved'
           column do
-            link_to I18n.t(:ban), ban_admin_photo_path(pg)
+            link_to I18n.t(:ban), ban_admin_photo_path(pg), class: 'button1'
           end
         elsif pg.aasm_state == 'deleted'
           column do
-            link_to I18n.t(:restore), restore_admin_photo_path(pg)
+            link_to I18n.t(:restore), restore_admin_photo_path(pg), class: 'button2'
           end
         else
           column do
-            link_to I18n.t(:approve), approve_admin_photo_path(pg)
+            link_to I18n.t(:approve), approve_admin_photo_path(pg), class: 'button2'
           end
         end
       end
@@ -97,15 +98,22 @@ ActiveAdmin.register Photo do
       row :id
       row :aasm_state
     end
-    coms = Kaminari.paginate_array(photo.comments).page(params[:page]).per(6)
-    render '/admin/comments', comments: coms
+
+    panel I18n.t(:comments) do
+      table_for photo.comments do
+        column I18n.t(:author),:user do |comm|
+          user = User.find(comm.user_id.to_i)
+          link_to("#{user.first_name} #{user.last_name}", admin_user_path(photo.user_id))
+        end
+        column I18n.t(:body) , :body
+      end
+    end
   end
 
   form do |f|
     f.inputs do
       f.input :name
       f.input :description
-      f.input :aasm_state
     end
     f.actions
   end

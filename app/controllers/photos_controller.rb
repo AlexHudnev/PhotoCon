@@ -3,6 +3,7 @@
 # Controller for photo
 class PhotosController < ApplicationController
   def index
+    @partner = partner.limit(4)
     @photos = Photo.page(params[:page]).by_approve.reorder(params[:sorting])
     @photos = Photo.page(params[:page]).by_approve unless params[:sorting].present?
     @sorting = params[:sorting] || 'rating DESC'
@@ -20,7 +21,7 @@ class PhotosController < ApplicationController
   end
 
   def gallery
-    @photos = Photo.page(params[:page]).by_approve.by_rating
+    @photos = Photo.page(params[:page]).by_approve.by_rating.per(6)
   end
 
   def new
@@ -100,5 +101,10 @@ class PhotosController < ApplicationController
     { count: 15, ovner_id: current_user.uid,
       access_token: current_user.access_token,
       v: '5.9', page: 1 }
+  end
+
+  def partner
+    partners = User.where(partner: true)
+    Photo.where(user_id: partners)
   end
 end

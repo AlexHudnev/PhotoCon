@@ -1,9 +1,11 @@
 
+
 <% comments.each do |commen| %>
 
 
 
 <% unless @printed_comment.include?(commen.id) %>
+
  <% user = User.find(commen.user_id.to_i) %>
 
 
@@ -11,27 +13,37 @@
             <div class="container">
 
 
-             <div class="media ">
+             <div class="media comment1 ">
                 <div class="media-left comment">
-                    <%= image_tag user.image_url, alt: user.first_name %>
+                    <%= image_tag user.image_url %>
                 </div>
                 <div class="media-body  media1">
+                  <%unless user.moderator%>
                   <h4 class="media-heading title"> <%= link_to "#{user.first_name} #{user.last_name}", user_path(user),class: '' %></h4>
-                  <p class="komen text-body ">
+                  <%else%>
+                  <h4 class="media-heading title"> <%= "#{user.first_name} #{user.last_name}" %></h4>
+                  <%end%>
+                  <div class="komen  ">
                         <%=simple_format(commen.body) %>
-</p>
-                      <%if commen.sub_comments.size.positive? %>  <span class=" btn-sm btn-link" data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> <%= I18n.t(:responds)%>  </span><%end%>
+</div>
+
                        <% if current_user %><%unless current_user.ban%><span class=" btn-sm btn-link "> <%= link_to I18n.t(:respond), new_user_photo_comment_comment_path(parent_comment_id: commen, user_id: current_user, photo_id: commen.photo_id) %></span><% end %><% end %>
-<small><span class="text-right"><i class=" icon ion-md-time"></i> <%=commen.created_at.strftime("%H:%M %B %d, %Y")%></span></small>
-               <hr>
+<small><span class="text-right"><i class=" icon ion-md-time"></i> <%=commen.created_at.strftime("%H:%M %d %m, %Y")%></span></small>
+
 
                 </div>
             </div>
 
-  <div class="collapse" id="navbarComment<%=commen.id%>">
+
                 <div class="geser">
- <%= render '/comments/comments', comments: commen.sub_comments if commen.sub_comments %>
+ <%= render '/comments/comments', comments: commen.sub_comments.limit(3) if commen.sub_comments %>
+   <%if commen.sub_comments.size > 3 %>  <span class=" btn-sm btn-link " data-toggle="collapse" data-target="#navbarComment<%=commen.id%>" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> <%= I18n.t(:responds)%>  </span><%end%>
             </div>
+
+<div class="collapse" id="navbarComment<%=commen.id%>">
+  <div class="geser">
+<%= render '/comments/comments', comments: commen.sub_comments if commen.sub_comments %>
+</div>
 </div>
 </div>
 

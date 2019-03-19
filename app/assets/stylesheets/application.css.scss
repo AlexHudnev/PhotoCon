@@ -34,7 +34,7 @@ img {
 
   }
 hyphens: auto;
- 
+
 
 
 }
@@ -70,7 +70,7 @@ font-size: 200%;
 	overflow:hidden;
 }
 .single_portfolio_text img{
-	width:100%;	
+	width:100%;
         border-radius: 10px;
 }
 
@@ -93,18 +93,19 @@ font-size: 200%;
 	left: 5%;
 	position: absolute;
 	transition:.6s;
-	
+
 }
 .portfolio_images_overlay2{
-	
+
 	background: rgba(0, 0, 0, 0.8);
+        width: 200px;
 	padding: 10px;
-	margin: 50px 140px;
+	margin: 50px 120px;
 	top: -100%;
 	left: 50%;
 	position: absolute;
 	transition:.6s;
-	
+
 }
 .portfolio_images_overlay h6{
 	text-transform: uppercase;
@@ -117,10 +118,10 @@ font-size: 200%;
 }
 
 .btn-xl {
-    
-    width: 160px;
-    height: 160px;
-    font-size: 100px;
+
+    width: 120px;
+    height: 120px;
+    font-size: 80px;
     border-radius: 8px;
 }
 
@@ -139,20 +140,26 @@ background: rgba(0, 0, 0, 0.5);
 }
 .modal-body
 {
- 
+
  background: rgba(0, 0, 0, 0.33);
- 
+
 }
 
 .modal-body img
 {       padding: 0;
         margin-left: 70px;
-	width: 80% ;        
+	width: 80% ;
 }
 
 
 
 
+.cardbox1 {
+  border-radius: 3px;
+  margin-bottom: 20px;
+  padding: 0px !important;
+  max-width: 240px;
+}
 .cardbox {
   border-radius: 3px;
   margin-bottom: 20px;
@@ -190,20 +197,20 @@ background: rgba(0, 0, 0, 0.5);
   height: 48px !important;
   padding: 2px;
   border: 2px solid #f4f4f4;
-} 
+}
 .media-body {
   -ms-flex: 1;
   flex: 1;
   padding: .4rem !important;
 }
 .media-body p{
-  font-family: 'Rokkitt', serif;	
+  font-family: 'Rokkitt', serif;
   font-weight: 500 !important;
   font-size: 14px;
   color: #88898a;
 }
 .media-body small span{
-  font-family: 'Rokkitt', serif;	
+  font-family: 'Rokkitt', serif;
   font-size: 12px;
   color: #aaa;
   margin-right: 10px;
@@ -223,7 +230,12 @@ background: rgba(0, 0, 0, 0.5);
     display: block;
     max-width: 100%;
     height: auto;
-}	
+}
+.img{
+
+    max-width: 200px;
+    height: 200px;
+}
 .fw {
     width: 100% !important;
 	height: auto;
@@ -235,7 +247,7 @@ background: rgba(0, 0, 0, 0.5);
 ---------------------------------- */
 .cardbox-base{
  border-bottom: 2px solid #f4f4f4;
-}	
+}
 
 
 /* ------------------------------- */
@@ -243,7 +255,7 @@ background: rgba(0, 0, 0, 0.5);
 ---------------------------------- */
 .cardbox-comments{
   padding: 10px 40px 20px 40px !important;
-  
+
 }
  .comment-avatar img{
   margin-top: 1px;
@@ -271,8 +283,9 @@ background: rgba(0, 0, 0, 0.5);
     font-weight:bold;
 }
 .komen {
- 
+    
     font-size:14px;
+    border-bottom: solid  gray 1px;
 }
 .geser {
     margin-left:55px;
@@ -297,6 +310,7 @@ color:#fffff !important;
   font-family: arial;
 }
 
+
 @media (min-width: 768px) {
 .carousel-multi-item-2 .col-md-3 {
 float: left;
@@ -318,7 +332,7 @@ height: 100px;
   outline: black;
   background-size: 100%, 100%;
   border-radius: 50%;
-  
+
   background-image: none;
 }
 
@@ -335,10 +349,10 @@ height: 100px;
   color: black;
 }
 
-.new {  
+.new {
     object-fit: cover;
     width: 300px;
-    height: 300px;;  
+    height: 300px;;
 }
 
 header.masthead {
@@ -382,10 +396,34 @@ hr.star-light {
   margin-right: auto;
 }
 
+.button_blue{
+   background-image:url(send-regular-36.png);
+   background-repeat:no-repeat;
+}
 
+.button_blue:hover{
+  background-color: #4c75a3;
+}
+
+.vk
+{
+   background-image:url(vk-logo-36.png);
+   background-repeat:no-repeat;
+padding: 18px;
+}
+
+.vk:hover{
+  background-color: #597da3;
+}
 .navbtn
 {
    width: 140px !important;
+}
+
+.partner
+{
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 

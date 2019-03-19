@@ -3,17 +3,19 @@
 <%= render 'sorting'%>
 </div>
 <br>
-<div id='paginator1' >
 
-<%= paginate @photos , :theme => 'twitter-bootstrap-4',
-                   :pagination_class => " pagination justify-content-center ", remote:true%>
-</div>
+<%if @partner.size.positive? %>
+<div class = "partner"><h4 class="text-center "><%= I18n.t(:partners)%></h4>
+<div class = "photos row justify-content-center" id=''>
+
+     <%= render @partner %>
+
+</div></div>
+<%end%>
+<hr>
 
 
-
-
-
-<div class = "photos row" id='photos'>
+<div class = "photos row justify-content-center" id='photos'>
 
      <%= render @photos %>
 

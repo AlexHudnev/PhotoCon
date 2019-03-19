@@ -24,8 +24,7 @@ module Api
         render json: photo, status: :ok
       end
 
-      private
-
+      private    
       def photo_params
         { name: params.fetch(:photo)[:name],
           photography: params.fetch(:photo)[:photography],

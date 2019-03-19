@@ -2,7 +2,9 @@
 
 # application controller
 class ApplicationController < ActionController::Base
+  include ActiveSupport::Rescuable
   config.before_action :set_admin_locale
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
   private
 
   def current_user
@@ -11,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   def set_admin_locale
     I18n.locale = :ru
+  end
+
+  def not_found
+    render xml: exception, status: 500
   end
   helper_method :current_user
 end

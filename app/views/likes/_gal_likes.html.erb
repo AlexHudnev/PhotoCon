@@ -1,5 +1,7 @@
 <div class="text-center">
+
   <% if current_user %>
+  <% unless current_user.ban%>
   <% like =  Like.find_by(user_id: current_user.id,photo_id: photo.id)%>
   <%  unless like %>
 <%= form_for [photo,photo.likes.build] , remote: true do |f| %>
@@ -10,7 +12,7 @@
         like_path(like.id),
                     method: :delete,
                     class: ' btn-xl btn-outline-primary  btn' , style: "", remote: true%>
-
+<% end %>
 <% end %>
 <% end %>
 </div>

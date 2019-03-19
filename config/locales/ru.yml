@@ -1,10 +1,33 @@
 ru:
+  partners: "От партнёров"
+  baninf: "Забанить на 15 минут"
+  sharing: "Поделиться ссылкой в ВК"
+  name: "Название"
+  like: "Лайков"
+  show: "Посмотреть"
+  body: "Комментарий"
+  edit: "Изменить"
+  moderator: "Модераторы"
+  update_model: "Изменить %{model}"
+  time:
+    formats:
+      default: "%d %B %Y"
+      date: "%d %B %Y"
+      time: "%H:%M"
+      long: "%Y-%m-%d %H:%M:%S"
+  date:
+    formats:
+      long: "%d %B %Y"
+      default: "%d %b %Y"
+    month_names: [~, Января, Февраля, Марта, Апреля, Мая, Июня, Июля, Августа, Сентября, Октября, Ноября, Декабря]
+    abbr_month_names: [~, января, февраля, марта, апреля, мая, июня, июля, августа, сентября, октября, ноября, декабря]
   comment_count ASC: "Популярность ▲"
   comment_count DESC: "Популярность ▼"
   created_at ASC: "Дата ▲"
   created_at DESC: "Дата ▼"
   rating ASC: "Рейтинг ▲"
   rating DESC: "Рейтинг ▼"
+  comments: "Комментарии"
   views:
       pagination:
         first: "Начало"
@@ -12,7 +35,7 @@ ru:
         next: "Далее"
         last: "Конец"
         truncate: "..."
-  ban_massage: "У вас временный бан, доступ к основным функциям ограничен"
+  ban_massage: "У вас временный бан, доступ к основным функциям ограничен примерно на 15 минут)"
   description: "Описание"
   all: "Все"
   send_to_moder: "Фото отправлено на модерацию"
@@ -40,24 +63,41 @@ ru:
   no_sign: 'Надо авторизоваться'
   add: "Добавить Комментарий"
   reply: 'Ответ на комментарий'
-  responds: 'Ответы'
+  responds: 'Все ответы'
   respond: 'Ответить'
   new_photo: "Новое Фото"
   profile: 'Мой профиль'
   update_profile: 'Обновить профиль'
-  logout: 'Выход'       
+  logout: 'Выход'
   rating: "Рейтинг"
-  gallery: "Галлерея"
+  gallery: "Галерея"
   sign_in: 'Авторизация через VK'
   activerecord:
     models:
-      photo: Фото
-      user: Пользователь
-      admin_user: Администраторы
-      comment: Коментарии 
+      photo:
+        few: 'Фото'
+        many: 'Фото'
+        one: 'Фото'
+        other: 'Фото'
+      user:
+        few: 'Пользователей'
+        many: 'Пользователей'
+        one: 'Пользователя'
+        other: 'Пользователи'
+      admin_user:
+        few: 'Администраторов'
+        many: 'Администраторы'
+        one: 'Администраторa'
+        other: 'Администраторы'
+      comment:
+        few: 'Комментарий'
+        many: 'Комментарии'
+        one: 'Комментарий'
+        other: 'Комментарии'
     attributes:
       photo:
         name: "Название"
+        share: "Шаринги"
         description: "Описание"
         photography: "Фото"
         photo: "Фото"
@@ -69,20 +109,25 @@ ru:
         updated_at: "Дата обновления"
         moderation: "Модерационные действия"
       user:
+        create: "Создать"
         first_name: "Имя"
         last_name: "Фамилия"
         moderator: "Модератор?"
+        shared: "Шаринги"
         created_at: "Дата создания"
         updated_at: "Дата обновления"
+        ban: "Бан"
+        partner: "Партнёр"
   approve: "Принять"
   ban: "Заблокировать"
+  reban: "Разблокировать"
   restore: "Восстановить"
-  dowload_all_photo: "Скачать все фото"  
+  dowload_all_photo: "Скачать все фото"
   time:
       formats:
         long: "%Y-%m-%d %H:%M:%S"
   active_admin:
-    current_sign_in: "Текущая сессия"    
+    current_sign_in: "Текущая сессия"
     first_name: "Имя"
     last_name: "Фамилия"
     photos:
@@ -90,14 +135,14 @@ ru:
       photography: "Фото"
       author: "Автор"
       status: "Текущий статус"
-      moderation: "Модерационные действия"      
+      moderation: "Модерационные действия"
     admin_users:
         email: "Адрес электронной почты"
     dashboard: "Панель управления"
     dashboard_welcome:
       welcome: "Добро пожаловать в Active Admin. Это стандартная страница управления сайтом."
       call_to_action: "Чтобы добавить сюда что-нибудь загляните в 'app/admin/dashboard.rb'"
-    
+    create: "Создать"
     view: "Открыть"
     edit: "Изменить"
     delete: "Удалить"
@@ -107,7 +152,7 @@ ru:
     delete_model: "Удалить %{model}"
     details: "%{model} подробнее"
     cancel: "Отмена"
-    
+    update: "Обновить"
     empty: "Пусто"
     previous: "Пред."
     next: "След."
@@ -119,6 +164,7 @@ ru:
       buttons:
         filter: "Фильтровать"
         clear: "Очистить"
+        update: "Обновить"
       predicates:
         contains: "Содержит"
         equals: "Равно"
@@ -176,7 +222,7 @@ ru:
       selection_toggle_explanation: "(Отметить всё / Снять выделение)"
       action_label: "%{title} выбранное"
       labels:
-        destroy: "Удалить"    
+        destroy: "Удалить"
     comments:
       created_at: "Дата создания"
       resource_type: "Тип ресурса"
@@ -193,6 +239,8 @@ ru:
       errors:
         empty_text: "Комментарий не сохранен, текст не должен быть пустым."
     devise:
+      photo:
+        submit: "Обновить"
       username:
         title: "Имя пользователя"
       email:

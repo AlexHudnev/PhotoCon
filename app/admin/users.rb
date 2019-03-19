@@ -3,7 +3,10 @@
 ActiveAdmin.register User do
   config.xls_builder.delete_columns :created_at, :updated_at, :moderator,
                                     :access_token
-  actions :all, except: [:destroy]
+  permit_params :first_name, :last_name, :image_url, :email, :moderator,
+                :access_token, :uid , :partner
+  scope I18n.t(:all), :all
+  scope (I18n.t(:moderator)) { User.where(moderator: true) }
   index do
     selectable_column
     column :first_name
@@ -11,9 +14,26 @@ ActiveAdmin.register User do
     column :email
     column :created_at
     column :ban do |pg|
-      link_to :ban, ban_admin_user_path(pg)
+      columns do
+        if pg.ban
+          column do
+            link_to I18n.t(:reban), reban_admin_user_path(pg), class: 'button2'
+          end
+        else unless pg.moderator
+          column do
+            link_to I18n.t(:ban), ban_admin_user_path(pg), class: 'button1',title: I18n.t(:baninf)
+          end
+          end
+        end
+        end
     end
-    actions
+    actions defaults: false, dropdown: true do |pg|
+      item  link_to I18n.t(:show), admin_user_path(pg)
+      unless Photo.where(user_id: pg.id).size.positive?
+        item link_to I18n.t(:delete), delete_admin_user_path(pg)
+      end
+      item link_to I18n.t(:edit), edit_admin_user_path(pg) if pg.moderator
+    end
   end
   show do
     photos = Photo.where(user_id: params[:id])
@@ -21,17 +41,13 @@ ActiveAdmin.register User do
       row :image do |ad|
         image_tag ad.image_url
       end
-      unless Photo.where(user_id: params[:id]).size.positive?
-        row :delete do |pg|
-          link_to :delete , delete_admin_user_path(pg)
-        end
-      end
       row :shared do |pg|
         photos.inject(0) { |ac, el| ac + el.share }
       end
       row :ban
       row :id
       row :moderator
+      row :partner
       row :first_name
       row :last_name
       row :access_token
@@ -47,11 +63,14 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs do
+      f.input :image_url
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :ban
       f.input :moderator
+      f.input :access_token
+      f.input :uid
+      f.input :partner
     end
     f.actions
   end
@@ -61,6 +80,12 @@ ActiveAdmin.register User do
     user.ban = true
     user.save
     BanWorker.perform_in(20.minutes, params[:id])
+    redirect_to admin_users_path
+  end
+  member_action :reban do
+    user = User.find_by(id: params[:id])
+    user.ban = false
+    user.save
     redirect_to admin_users_path
   end
   member_action :delete do
