@@ -2,7 +2,6 @@
 
 # application controller
 class ApplicationController < ActionController::Base
-  include ActiveSupport::Rescuable
   config.before_action :set_admin_locale
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   private
@@ -16,7 +15,16 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    render xml: exception, status: 500
+    redirect_to :root
+    flash[:danger] = 'Page not found '
   end
+
+  def verify_authenticity_token
+    token = request.headers['token']
+    @api_user = User.find_by(authenticity_token: token)
+    raise ::Errors::InvalidCredentials unless @api_user
+  end
+
   helper_method :current_user
+  helper_method :verify_authenticity_token
 end

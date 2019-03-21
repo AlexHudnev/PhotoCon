@@ -8,11 +8,17 @@
                   <span ><%= link_to "X",
                           user_path(@user.id),
                                       method: :delete,
-                                      data: { confirm: I18n.t(:delete_confirmation) },class: 'btn btn-outline-danger' %></span>  <% end %>  <% end %></b></h3>
+                                      data: { confirm: I18n.t(:delete_confirmation) },class: 'btn btn-outline-danger' %></span>
+                                      <p><%= link_to I18n.t(:new_token),
+                                              user_path(@user.id),
+                                                          method: :token,
+                                                          data: { confirm: I18n.t(:token_confirmation) },class: 'btn btn-outline-primary'%></p>
+
+                                       <% end %>  <% end %></b></h3>
                   <hr>
                   <p class="title">email: <%= @user.email %></p>
 
-                  <p></p>
+                <%  if @user.id == current_user.id %>  <span class="token"><%=I18n.t(:token)%>: <%= @user.authenticity_token %></span> <% end %>
 
                   <p><%= link_to I18n.t(:social), @user.url,class: ' btn-primery' %></p>
 </div>

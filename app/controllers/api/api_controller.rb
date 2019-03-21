@@ -2,11 +2,11 @@
 
 module Api
   class ApiController < ApplicationController
-    def validate
+    def validate(outcome)
       if outcome.valid?
-        render nothing: true, status: :created
+        render json: { message: 'Created' }, status: :ok
       else
-        render json: outcome.errors.symbolic, status: :unprocessable_entity
+        render json: outcome.errors, status: :unprocessable_entity
       end
     end
   end

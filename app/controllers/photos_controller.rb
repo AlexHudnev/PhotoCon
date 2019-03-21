@@ -105,6 +105,6 @@ class PhotosController < ApplicationController
 
   def partner
     partners = User.where(partner: true)
-    Photo.where(user_id: partners)
+    Photo.where(user_id: partners).approved
   end
 end

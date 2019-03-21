@@ -26,6 +26,7 @@ module UsersHelper
       user.last_name = auth_hash['info']['last_name']
       user.url = auth_hash['info']['urls']['Vkontakte']
       user.email = auth_hash['info']['email'] if auth_hash['info']['email']
+      user.set_access_token
       user.save!
       user
     end

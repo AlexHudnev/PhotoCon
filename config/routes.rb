@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   match '/user/:id', to: 'users#show', via: 'get'
   post '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/comments',
        to: 'comments#create', as: 'user_photo_comment_comments'
+  post '/users/:id', to: 'users#token'
   get '/users/:user_id/photos/:photo_id/comments/:parent_comment_id/new',
       to: 'comments#new', as: 'new_user_photo_comment_comment'
   get '/share/', to: 'photos#share'

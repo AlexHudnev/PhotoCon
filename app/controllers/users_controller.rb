@@ -30,6 +30,16 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def token
+    @user = User.find(params[:id])
+    return unless @user.id == current_user.id
+
+    @user.set_access_token
+    @user.save
+    flash[:success] = 'New token set'
+    redirect_to @user
+  end
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email)
   end

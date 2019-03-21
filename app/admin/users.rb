@@ -4,9 +4,9 @@ ActiveAdmin.register User do
   config.xls_builder.delete_columns :created_at, :updated_at, :moderator,
                                     :access_token
   permit_params :first_name, :last_name, :image_url, :email, :moderator,
-                :access_token, :uid , :partner
+                :access_token, :uid, :partner
   scope I18n.t(:all), :all
-  scope (I18n.t(:moderator)) { User.where(moderator: true) }
+  scope(I18n.t(:moderator)) { User.where(moderator: true) }
   index do
     selectable_column
     column :first_name
@@ -20,12 +20,13 @@ ActiveAdmin.register User do
             link_to I18n.t(:reban), reban_admin_user_path(pg), class: 'button2'
           end
         else unless pg.moderator
-          column do
-            link_to I18n.t(:ban), ban_admin_user_path(pg), class: 'button1',title: I18n.t(:baninf)
-          end
+             column do
+               link_to I18n.t(:ban), ban_admin_user_path(pg), class: 'button1',
+                                                              title: I18n.t(:baninf)
+             end
           end
         end
-        end
+      end
     end
     actions defaults: false, dropdown: true do |pg|
       item  link_to I18n.t(:show), admin_user_path(pg)
@@ -41,7 +42,7 @@ ActiveAdmin.register User do
       row :image do |ad|
         image_tag ad.image_url
       end
-      row :shared do |pg|
+      row :shared do
         photos.inject(0) { |ac, el| ac + el.share }
       end
       row :ban
@@ -54,6 +55,7 @@ ActiveAdmin.register User do
       row :uid
       row :url
       row :email
+      row :authenticity_token
       row :created_at
       row :updated_at
     end
