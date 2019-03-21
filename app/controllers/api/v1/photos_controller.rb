@@ -40,6 +40,7 @@ module Api
       def photo_params
         { name: params[:name],
           photography: params[:photography],
+          description: params[:description],
           remote_photography_url: params[:remote_photography_url],
           user: @api_user }
       end

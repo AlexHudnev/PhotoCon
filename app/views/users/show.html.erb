@@ -1,77 +1,88 @@
+
 <br>
-<div class="row card">
-<br>
-                <div class=" col ">
-                <%= image_tag @user.image_url, alt:  @user.first_name , style:"width:100%"%>
-                  <br>
-                  <h3><b><%= @user.first_name%> <%=@user.last_name %><% if current_user %> <%  if @user.id == current_user.id %>
-                  <span ><%= link_to "X",
-                          user_path(@user.id),
-                                      method: :delete,
-                                      data: { confirm: I18n.t(:delete_confirmation) },class: 'btn btn-outline-danger' %></span>
-                                      <p><%= link_to I18n.t(:new_token),
-                                              user_path(@user.id),
-                                                          method: :token,
-                                                          data: { confirm: I18n.t(:token_confirmation) },class: 'btn btn-outline-primary'%></p>
+<div class="row   inf">
 
-                                       <% end %>  <% end %></b></h3>
-                  <hr>
-                  <p class="title">email: <%= @user.email %></p>
+      <div class="col "><div class="row">  <div class="col infav col-md-6">
+        <br>
+            <%= image_tag @user.image_url, alt:  @user.first_name , style:"width:100%"%>
 
-                <%  if @user.id == current_user.id %>  <span class="token"><%=I18n.t(:token)%>: <%= @user.authenticity_token %></span> <% end %>
+        </div>
 
-                  <p><%= link_to I18n.t(:social), @user.url,class: ' btn-primery' %></p>
-</div>
+        <div class="col inf  py-1 px-lg-1  ">
+            <blockquote>
+              <br>
+              <h3><b><%= @user.first_name%> <%=@user.last_name %> <% if current_user %> <%  if @user.id == current_user.id %>
+              <span ><%= link_to "X",
+                      user_path(@user.id),
+                                  method: :delete,
+                                  data: { confirm: I18n.t(:delete_confirmation) },class: 'btn btn-outline-danger' %></span><% end %>  <% end %>
+            </blockquote><hr>
+            <p> <i class="glyphicon glyphicon-envelope"></i> email: <%= @user.email %>
+                <br
+                /> <i class="glyphicon glyphicon-globe"></i> <%= link_to I18n.t(:social), @user.url,class: ' btn-primery' %>
+                <br /> <i class="glyphicon glyphicon-gift"></i>   <% if current_user %><%  if @user.id == current_user.id %>  <span class=""><%=I18n.t(:token)%>:</span>
+              <span class="token" > <%= @user.authenticity_token %></span><small><%= link_to I18n.t(:new_token),
+                        user_path(@user.id),
+                                    method: :token,
+                                    data: { confirm: I18n.t(:token_confirmation) },class: 'btn-sm '%>
+                    </small>
+
+<% end %><% end %>
+
+                </p>
+              </div></div></div></div>
+
+<div class="row inf ">
 <hr>
-<div class="col   align-self-start">
-<% if @photos.find_by(user_id: @user.id)%>
-                <h3> <%=I18n.t(:user_gallery)%></h3>
-  <div id="carousel" class="carousel slide carousel-fade z-depth-1-half single_portfolio_text text-center" data-ride="carousel" style="margin-left:0px;">
+      <div class="col card  ">            <% if @photos.find_by(user_id: @user.id)%>
+                                  <h5> <%=I18n.t(:user_gallery)%></h5>
+                    <div id="carousel" class="carousel slide carousel-fade z-depth-1-half single_portfolio_text text-center" data-ride="carousel" style="margin-left:0px;">
 
 
-    <div class="carousel-inner text-center" role="listbox">
-      <div class="carousel-item active text-center">
-        <div class="view single_portfolio_text" style="margin-left:0px;">
+                      <div class="carousel-inner text-center" role="listbox">
+                        <div class="carousel-item active text-center">
+                          <div class="view single_portfolio_text" style="margin-left:0px;">
 
-<%=  image_tag("log.png", alt: "Photocon logo")  %>
-          <div class="mask rgba-black-light"></div>
-        </div>
-        <div class="carousel-caption">
-
-
-
-        </div>
+                  <%=  image_tag("log.png", alt: "Photocon logo")  %>
+                            <div class="mask rgba-black-light"></div>
+                          </div>
+                          <div class="carousel-caption">
 
 
 
-    </div>
-    <% @photos.each do |photo| %>
-       <%  if photo.user_id == @user.id %>
+                          </div>
 
-      <div class="carousel-item text-center">
-        <div class="view single_portfolio_text" style="margin-left:0px;">
-            <a  href=<%=photo_path(photo)%>> <%= image_tag photo.photography.gallery.url ,class:"d-block " %></a>
 
-          <div class="mask rgba-black-light"></div>
-        </div>
-<div class="portfolio_images_overlay2 " >
-<div class="col  text-primary"><h4> <%= photo.name %></h4><span class="text-danger" ><%= I18n.t(:like)%>: </span><span class="1votes-count-<%=photo.id%> " ><%= photo.rating %></span> </div>
-<span class="galvotes-count-<%=photo.id%>">
-             <%= render '/likes/gal_likes',  photo: photo %></span>
- </div>
-      </div>
 
-    <%end%>
-    <%end%>
-</div>
+                      </div>
+                      <% @photos.each do |photo| %>
+                         <%  if photo.user_id == @user.id %>
 
-    <a class="carousel-control-prev text-left" href="#carousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next text-danger text-right" href="#carousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-<%end%>
-  </div></div></div></div>
+                        <div class="carousel-item text-center">
+                          <div class="view single_portfolio_text" style="margin-left:0px;">
+                              <a  href=<%=photo_path(photo)%>> <%= image_tag photo.photography.gallery.url ,class:"d-block " %></a>
+
+                            <div class="mask rgba-black-light"></div>
+                          </div>
+                  <div class="portfolio_images_overlay2 " >
+                  <div class="col  text-primary"><h4> <%= photo.name %></h4><span class="text-danger" ><%= I18n.t(:like)%>: </span><span class="1votes-count-<%=photo.id%> " ><%= photo.rating %></span> </div>
+                  <span class="galvotes-count-<%=photo.id%>">
+                               <%= render '/likes/gal_likes',  photo: photo %></span>
+                   </div>
+                        </div>
+
+                      <%end%>
+                      <%end%>
+                  </div>
+
+                      <a class="carousel-control-prev text-left" href="#carousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next text-danger text-right" href="#carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                  <%end%>
+                    </div></div></div>
+        </div></div></div>

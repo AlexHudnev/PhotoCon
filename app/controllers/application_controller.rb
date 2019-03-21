@@ -4,6 +4,8 @@
 class ApplicationController < ActionController::Base
   config.before_action :set_admin_locale
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  $ban_list = []
+
   private
 
   def current_user
@@ -15,8 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    redirect_to :root
-    flash[:danger] = 'Page not found '
+    render 'errors/error404'
   end
 
   def verify_authenticity_token

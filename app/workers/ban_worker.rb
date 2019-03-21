@@ -7,5 +7,6 @@ class BanWorker
     user = User.find(user_id)
     user.ban = false
     user.save
+    $ban_list.delete(user.uid)
   end
 end

@@ -3,7 +3,7 @@
 # Controller for photo
 class PhotosController < ApplicationController
   def index
-    @partner = partner.limit(4)
+    @partner = partner.reorder('created_at DESC').limit(4)
     @photos = Photo.page(params[:page]).by_approve.reorder(params[:sorting])
     @photos = Photo.page(params[:page]).by_approve unless params[:sorting].present?
     @sorting = params[:sorting] || 'rating DESC'

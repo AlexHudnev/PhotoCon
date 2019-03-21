@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
+
   config.xls_builder.delete_columns :created_at, :updated_at, :moderator,
                                     :access_token
   permit_params :first_name, :last_name, :image_url, :email, :moderator,
                 :access_token, :uid, :partner
   scope I18n.t(:all), :all
   scope(I18n.t(:moderator)) { User.where(moderator: true) }
+
   index do
     selectable_column
     column :first_name
@@ -33,7 +35,7 @@ ActiveAdmin.register User do
       unless Photo.where(user_id: pg.id).size.positive?
         item link_to I18n.t(:delete), delete_admin_user_path(pg)
       end
-      item link_to I18n.t(:edit), edit_admin_user_path(pg) if pg.moderator
+      item link_to I18n.t(:edit), edit_admin_user_path(pg)
     end
   end
   show do
@@ -64,16 +66,18 @@ ActiveAdmin.register User do
   end
 
   form do |f|
-    f.inputs do
-      f.input :image_url
-      f.input :first_name
-      f.input :last_name
-      f.input :email
-      f.input :moderator
-      f.input :access_token
-      f.input :uid
-      f.input :partner
+    if f.object.moderator?
+      f.inputs do
+        f.input :image_url
+        f.input :first_name
+        f.input :last_name
+        f.input :email
+        f.input :access_token
+        f.input :uid
+      end
     end
+    f.input :moderator
+    f.input :partner
     f.actions
   end
 
@@ -81,6 +85,7 @@ ActiveAdmin.register User do
     user = User.find_by(id: params[:id])
     user.ban = true
     user.save
+    $ban_list.push(user.uid)
     BanWorker.perform_in(20.minutes, params[:id])
     redirect_to admin_users_path
   end
