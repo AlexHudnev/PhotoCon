@@ -4,7 +4,6 @@
 class ApplicationController < ActionController::Base
   config.before_action :set_admin_locale
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  $ban_list = []
 
   private
 

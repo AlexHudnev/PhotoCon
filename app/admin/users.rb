@@ -85,13 +85,14 @@ ActiveAdmin.register User do
     user = User.find_by(id: params[:id])
     user.ban = true
     user.save
-    $ban_list.push(user.uid)
+    Redis.current.set(user.uid, 'Ban')
     BanWorker.perform_in(20.minutes, params[:id])
     redirect_to admin_users_path
   end
   member_action :reban do
     user = User.find_by(id: params[:id])
     user.ban = false
+    Redis.current.del(user.uid)
     user.save
     redirect_to admin_users_path
   end
