@@ -1,4 +1,12 @@
 ru:
+  formtastic:
+    :yes: 'Да'
+    :no: 'Нет'
+    :create: 'Создать %{model}'
+    :update: 'Обновить %{model}'
+    :submit: 'Подтвердить %{model}'
+    :required: 'необходимый'
+  new_token_get: "Сгенерирован новый токен"
   token_confirmation: "Вы хотите получить новый токен ?"
   token: "Апи токен"
   new_token: "Перегенерировать"
@@ -11,7 +19,6 @@ ru:
   body: "Комментарий"
   edit: "Изменить"
   moderator: "Модераторы"
-  update_model: "Изменить %{model}"
   time:
     formats:
       default: "%d %B %Y"
@@ -130,6 +137,7 @@ ru:
       formats:
         long: "%Y-%m-%d %H:%M:%S"
   active_admin:
+    update_model: "Обновить %{model}"
     current_sign_in: "Текущая сессия"
     first_name: "Имя"
     last_name: "Фамилия"
@@ -242,6 +250,8 @@ ru:
       errors:
         empty_text: "Комментарий не сохранен, текст не должен быть пустым."
     devise:
+      failure:
+        admin_user: "Вы не аутифицированны"
       photo:
         submit: "Обновить"
       username:

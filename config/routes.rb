@@ -6,10 +6,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get '/users/current', to: 'users#current'
       resources :photos
       resources :comments
       resources :likes
       resources :users
+      get '/users/:id/photos', to: 'users#photos'
+      get '/photos/:photo_id/comments', to: 'photos#comments'
+      get '/photos/:photo_id/likes', to: 'photos#likes'
     end
     resources :photos
     resources :comments

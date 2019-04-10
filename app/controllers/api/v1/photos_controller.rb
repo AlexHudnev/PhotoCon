@@ -36,7 +36,24 @@ module Api
         render json: photo, status: :ok
       end
 
+      def comments
+        photo = Photo.find(params[:photo_id])
+        raise ::Errors::InvalidRequestData unless photo
+
+        comments = photo.comments.page(params[:page]).per(params[:per_page])
+        render json: comments, status: :ok
+      end
+
+      def likes
+        photo = Photo.find(params[:photo_id])
+        raise ::Errors::InvalidRequestData unless photo
+
+        likes = photo.likes.page(params[:page]).per(params[:per_page])
+        render json: likes, status: :ok
+      end
+
       private
+
       def photo_params
         { name: params[:name],
           photography: params[:photography],

@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
     @user.set_access_token
     @user.save
-    flash[:success] = 'New token set'
+    flash[:success] = I18n.t(:new_token_get)
     redirect_to @user
   end
 
