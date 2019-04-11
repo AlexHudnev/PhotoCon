@@ -46,7 +46,7 @@ ActiveAdmin.register Photo do
     redirect_to admin_photos_path
   end
 
-  index  do
+  index do
     selectable_column
     column :name
     column :share
@@ -101,11 +101,11 @@ ActiveAdmin.register Photo do
 
     panel I18n.t(:comments) do
       table_for photo.comments do
-        column I18n.t(:author),:user do |comm|
+        column I18n.t(:author), :user do |comm|
           user = User.find(comm.user_id.to_i)
           link_to("#{user.first_name} #{user.last_name}", admin_user_path(photo.user_id))
         end
-        column I18n.t(:body) , :body
+        column I18n.t(:body), :body
       end
     end
   end

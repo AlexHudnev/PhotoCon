@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module ZipHelper
-
   class ZipPhotos
     # create zip all photos
     def make_zip

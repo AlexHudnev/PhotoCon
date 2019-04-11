@@ -15,7 +15,7 @@ module Photos
     end
 
     def execute
-      photo = user.photos.create!(name: name,photography: photography,
+      photo = user.photos.create!(name: name, photography: photography,
                                   description: description,
                                   remote_photography_url: remote_photography_url)
       errors.merge!(photo.errors) unless photo.save

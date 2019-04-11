@@ -1,0 +1,13 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'tmp/**/*'
+    - 'test/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'lib/anycable/rpc/**/*'
+    - 'vendor/**/*'
+    - 'gemfiles/**/*'
+    - 'Gemfile'
+    - 'Rakefile'
+    - '*.gemspec'

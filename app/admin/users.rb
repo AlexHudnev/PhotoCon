@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-
   config.xls_builder.delete_columns :created_at, :updated_at, :moderator,
                                     :access_token
   permit_params :first_name, :last_name, :image_url, :email, :moderator,
@@ -22,11 +21,11 @@ ActiveAdmin.register User do
             link_to I18n.t(:reban), reban_admin_user_path(pg), class: 'button2'
           end
         else unless pg.moderator
-             column do
-               link_to I18n.t(:ban), ban_admin_user_path(pg), class: 'button1',
-                                                              title: I18n.t(:baninf)
+            column do
+              link_to I18n.t(:ban), ban_admin_user_path(pg),
+                      class: 'button1', title: I18n.t(:baninf)
+            end
              end
-          end
         end
       end
     end

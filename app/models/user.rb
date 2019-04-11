@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def generate_token
     loop do
       token = SecureRandom.hex(10)
