@@ -1,4 +1,11 @@
 ru:
+  devise:
+      failure:        
+        admin_user: 
+          unauthenticated: "Вы не аутифицированны"
+      sessions:
+        signed_in: "Вход выполнен"
+          
   formtastic:
     :yes: 'Да'
     :no: 'Нет'
@@ -251,7 +258,10 @@ ru:
         empty_text: "Комментарий не сохранен, текст не должен быть пустым."
     devise:
       failure:
-        admin_user: "Вы не аутифицированны"
+        already_authenticated: "Você já está logado."
+        unauthenticated: "фафывы"
+        admin_user: 
+          unauthenticated: "Вы не аутифицированны"
       photo:
         submit: "Обновить"
       username:

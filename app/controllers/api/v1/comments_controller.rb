@@ -4,7 +4,7 @@ module Api
   module V1
     class CommentsController < ApiController
       layout false
-      before_action :verify_authenticity_token, only: [:create, :index]
+      before_action :verify_authenticity_token, only: %i[create index]
 
       def create
         raise ::Errors::Ban if @api_user.ban

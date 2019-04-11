@@ -29,7 +29,6 @@ gem 'pg'
 gem 'rails', '5.2.1'
 gem 'rails-i18n', '~> 5.1'
 gem 'redis'
-gem 'rubocop'
 gem 'rubyzip'
 gem 'sass-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -40,6 +39,9 @@ gem 'uglifier'
 gem 'zip-zip'
 
 group :development, :test do
+  gem 'bullet'
+  gem 'rubocop'
+  gem 'rubocop-performance'
   gem 'byebug'
   gem 'spring'
   gem 'web-console', '3.5.1'

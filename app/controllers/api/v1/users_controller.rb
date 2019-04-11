@@ -4,7 +4,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       layout false
-      before_action :verify_authenticity_token, only: [:destroy, :current]
+      before_action :verify_authenticity_token, only: %i[destroy current]
 
       def index
         users = User.all.page(params[:page]).per(params[:per_page])

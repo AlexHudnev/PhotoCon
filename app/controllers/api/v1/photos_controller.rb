@@ -5,10 +5,10 @@ module Api
     # api photos controller
     class PhotosController < ApiController
       layout false
-      before_action :verify_authenticity_token, only: [:create, :destroy]
+      before_action :verify_authenticity_token, only: %i[create destroy]
 
       def index
-        photos = Photo.approved.page(params[:page]).per(params[:per_page])
+        photos = Photo.approved.includes(:user).page(params[:page]).per(params[:per_page])
         photos = photos.reorder(params[:sorting]) if params[:sorting].present?
         photos = photos.find_by(id: params[:user_id]) if params[:user_id].present?
         render json: photos, status: :ok
@@ -33,6 +33,12 @@ module Api
         photo = Photo.approved.find(params[:id])
         raise ::Errors::InvalidRequestData unless photo
 
+        verify_authenticity_token
+        if @api_user
+          like = photo.likes.find_by(user_id: @api_user.id) ? true : false
+          render json: photo, serializer: PhotoSerializer, liked: like, status: :ok
+          return
+        end
         render json: photo, status: :ok
       end
 
