@@ -18,6 +18,7 @@ module Photos
       photo = user.photos.create!(name: name, photography: photography,
                                   description: description,
                                   remote_photography_url: remote_photography_url)
+      ActionCable.server.broadcast 'ReportsChannel', report: photo.to_json
       errors.merge!(photo.errors) unless photo.save
     end
   end

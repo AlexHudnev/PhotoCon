@@ -16,4 +16,5 @@
 //= require jquery3
 //= require bootstrap
 //= require select2
+//= require photos
 //= require_tree.

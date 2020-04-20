@@ -20,6 +20,10 @@ class PhotosController < ApplicationController
     @steps_lb.delete_leaderboard
   end
 
+  def reports
+
+  end
+
   def gallery
     @photos = Photo.page(params[:page]).by_approve.by_rating.per(6)
   end

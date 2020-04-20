@@ -118,6 +118,10 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.7.5)
+    dotenv-rails (2.7.5)
+      dotenv (= 2.7.5)
+      railties (>= 3.2, < 6.1)
     dry-inflector (0.1.2)
     erubi (1.8.0)
     excon (0.62.0)
@@ -387,6 +391,8 @@ GEM
     popper_js (1.14.5)
     progress (3.5.0)
     psych (3.1.0)
+    puma (4.3.3)
+      nio4r (~> 2.0)
     rack (2.0.7)
     rack-protection (2.0.5)
       rack
@@ -543,6 +549,7 @@ DEPENDENCIES
   carrierwave (= 1.2.2)
   coffee-rails
   devise
+  dotenv-rails
   fog
   httparty
   image_optim_pack
@@ -557,6 +564,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-vkontakte
   pg
+  puma
   rails (= 5.2.1)
   rails-i18n (~> 5.1)
   redis
@@ -574,4 +582,4 @@ DEPENDENCIES
   zip-zip
 
 BUNDLED WITH
-   1.16.2
+   1.17.2

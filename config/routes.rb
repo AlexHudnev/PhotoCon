@@ -21,8 +21,10 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  mount ActionCable.server => '/cable'
   root 'photos#index'
   post 'photos', to: 'photos#create'
+  get 'reports', to: 'photos#reports'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/auth/:provider/callback', to: 'session_controller#create'
   get 'download_zip', to: 'photos#download_zip'
