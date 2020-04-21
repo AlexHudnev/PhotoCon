@@ -39,9 +39,9 @@ gem 'uglifier'
 gem 'zip-zip'
 gem 'rubocop-performance'
 gem 'dotenv-rails'
+gem 'puma'
 
 group :development, :test do
-  gem 'puma'
   gem 'bullet'
   gem 'rubocop'
   gem 'rubocop-performance'
