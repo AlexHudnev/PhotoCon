@@ -15,11 +15,15 @@ module Photos
     end
 
     def execute
-      photo = user.photos.create!(name: name, photography: photography,
-                                  description: description,
-                                  remote_photography_url: remote_photography_url)
-      ActionCable.server.broadcast 'ReportsChannel', report: photo.to_json
-      errors.merge!(photo.errors) unless photo.save
+      @photo = user.photos.create!(name: name, photography: photography,
+                                   description: description,
+                                   remote_photography_url: remote_photography_url)
+      send_report
+      errors.merge!(@photo.errors) unless @photo.save
+    end
+
+    def send_report
+      ActionCable.server.broadcast 'ReportsChannel', report: @photo.to_json
     end
   end
 end
